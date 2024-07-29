@@ -1,0 +1,5 @@
+ Cleanup;cfgFilename
+ cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ :If ##.GitHub.FilesAndDirs.IsFile cfgFilename,'.renamed-by-GitHub-tests'
+     cfgFilename ⎕NMOVE cfgFilename,'.renamed-by-GitHub-tests'
+ :EndIf

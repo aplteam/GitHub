@@ -1,0 +1,16 @@
+ (r i)←ListIssues_CollectData_HTML list;ind
+ r←↑list.(number title labels user.login body created_at comments assignee updated_at html_url)
+ i←⎕NS''
+ i.(number title labels creator body created_at comments assignee updated_at html_url)←⍳10
+ r[;i.labels]←{0=≢⍵:⍵ ⋄ ⊃{⍺,',',⍵}/⍵.name}¨r[;i.labels]         ⍝ Convert lables
+ r[⍸(⊂'null')∘≡¨r[;i.body];i.body]←⊂''                          ⍝ Convert NULL to ''
+ r[⍸(⊂'null')∘≡¨r[;i.assignee];i.assignee]←⊂''                  ⍝ Convert NULL to ''
+ :If 0<≢ind←⍸0<≢¨r[;i.assignee]
+     r[ind;i.assignee]←r[ind;i.assignee].login                  ⍝ Convert to logon name
+ :EndIf
+ r[;i.created_at]←{⍵[(⍳10)]}¨r[;i.created_at]                   ⍝ Convert the date to YYYY-MM-DD
+ r[;i.updated_at]←{⍵[(⍳10)]}¨r[;i.updated_at]                   ⍝ Convert the date to YYYY-MM-DD
+⍝TODO⍝ r[;i.body]←{(⎕UCS 13)@(⍸⍵=⎕UCS 10)⊣⍵}¨r[;i.body]         ⍝ Convert LF into CR
+ r[;i.body]←r[;i.body]~⎕UCS 10                                  ⍝ Remove LF
+ r[;i.body]←{(⎕UCS 13)APLTreeUtils2.Split ⍵}¨r[;i.body]         ⍝ Split at CRs
+⍝Done

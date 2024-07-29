@@ -1,0 +1,27 @@
+ r←ListRepos parms;G;list;qdmx
+⍝
+ :Trap 11
+     G←⎕NEW GitHubAPIv3(,⊂parms.owner)
+ :Else
+     0 Assert⍨'Owner <',parms.owner,'> is unknown'
+ :EndTrap
+ :Trap 11
+     list←G.GetAllRepos
+ :Else
+     qdmx←⎕DMX
+     ('<',parms.owner,'> unknown (404)')Assert'Not Found (404)'≢qdmx.EM
+     qdmx.EM Assert 0
+ :EndTrap
+ :If 0=≢list
+     r←''
+ :Else
+     :If parms.verbose
+         r←↑list.(name open_issues_count description)
+         r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'Name' 'OI (*)' 'Description'),[1]r
+         r⍪←↑(' ' ' ' ' ')('* Open issues' ' ' ' ')
+         r[⍸0≡¨r[;2];2]←⊂''
+     :Else
+         r←⍪list.name
+         r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵},⊂'Name (',(⍕≢r),')'),[1]r
+     :EndIf
+ :EndIf

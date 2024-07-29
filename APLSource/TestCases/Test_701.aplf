@@ -1,0 +1,19 @@
+ R←Test_701(stopFlag batchFlag);⎕TRAP;list;name;help
+⍝ Exercise all help functions of ]GitHub
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ list←⎕SE.UCMD'GitHub -??'
+ →T.PassesIf 0<≢list
+ list←↑2↓(⎕UCS 13)(≠⊆⊢)list
+ list←(¯1+list[;1]⍳']')↑list
+ list←{⍵↑⍨¯1+⍵⍳' '}¨##.GitHub.APLTreeUtils2.DLB↓list
+ →T.PassesIf list ∆LazyMatch ##.GitHub.Public
+
+ :For name :In list~⊂'Version'
+     help←⎕SE.UCMD'GitHub.',name,' -??'
+     →T.PassesIf 0<≢help
+ :EndFor
+
+ R←T._OK
+⍝Done

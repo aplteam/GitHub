@@ -1,0 +1,18 @@
+(
+ '# GitHub'
+ ''
+ 'The package `GitHubAPIv3` offers an API in order to retrieve data from GitHub, and trigger actions in case the user has been properly authorized.'
+ ''
+ 'The `]GitHub.*` user commands are an interface to `GitHubAPIv3` that allows a user to take advantages of some of the API functions.'
+ ''
+ 'In version 0.1.0 only two user commands are available:'
+ ''
+ '* `ListRepos`'
+ '* `ListIssues`'
+ ''
+ 'The plan is to add more user commands according to demand.'
+ ''
+ 'Note the all user commands require the specification of an _owner_. The owner can be saved permanently by passing the `-permanent` flag.'
+ ''
+ 'Once saved, the user does not need to specify the owner unless it changes.  '
+)

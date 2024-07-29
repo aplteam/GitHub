@@ -1,0 +1,46 @@
+ r←Run(Cmd Args);folder;P;⎕TRAP;aplVersion;SourceFile;parms
+ r←0 0⍴''
+ SourceFile←GetSourceFilename⊃⎕RSI
+ :Select ⎕C Cmd
+ :Case ⎕C'ListRepos'
+     parms←⎕NS''
+     parms.permanent←Args.Switch'permanent'
+     parms.verbose←Args.Switch'verbose'
+     parms.owner←''Args.Switch'_1'
+     :If parms.permanent
+         'You must specify an owner with -permanent'Assert 0<≢parms.owner
+     :ElseIf 0=≢parms.owner
+         parms.owner←GetDefaultOwner
+     :EndIf
+     r←ListRepos parms
+     :If parms.permanent
+         SaveDefaultOwner parms.owner
+     :EndIf
+ :Case ⎕C'ListIssues'
+     parms←⎕NS''
+     parms.permanent←Args.Switch'permanent'
+     parms.owner←''Args.Switch'_1'
+     parms.repo←''Args.Switch'_2'
+     :If parms.permanent
+         'You must specify an owner with -permanent'Assert 0<≢parms.owner
+         parms.repo←''Args.Switch'_2'
+         'You must specify a repository'Assert 0<≢parms.repo
+     :ElseIf 0=≢parms.repo
+         parms.repo←''Args.Switch'_1'
+         'You must specify a repository'Assert 0<≢parms.repo
+         parms.owner←GetDefaultOwner
+     :EndIf
+     parms.verbose←Args.Switch'verbose'
+     parms.html←Args.Switch'html'
+     parms.filename←''Args.Switch'filename'
+     parms.comments←0 Args.Switch'comments'
+     parms.collapse←Args.Switch'collapse'
+     r←ListIssues parms
+     :If parms.permanent
+         SaveDefaultOwner parms.owner
+     :EndIf
+ :Case ⎕C'Version'
+     r←↑('GitHub'Version)('GitHubAPIv3'(2⊃GitHubAPIv3.Version))
+ :Else
+     ∘∘∘ ⍝ Huh?!
+ :EndSelect

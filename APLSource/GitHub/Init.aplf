@@ -1,0 +1,8 @@
+ parms Init ns;json;cfg;buildNo;body
+⍝ Initialize the project
+ :If 0<⎕SE.⎕NC'GitHub'
+ :AndIf 0=⎕SE.GitHub.⎕NC'DEVELOPMENT'
+ :AndIf 1 ##.TestCases.CommTools.YesOrNo'Set DEVELOPMENT←1 in ⎕SE.GitHub? (Allows executing user command code in # rather than ⎕SE)'
+     ⎕SE.GitHub.DEVELOPMENT←1
+ :EndIf
+ ⍝Done

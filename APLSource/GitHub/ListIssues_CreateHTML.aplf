@@ -1,0 +1,37 @@
+ filename←ListIssues_CreateHTML(data ns i);row;parms;ns2;html;md;body
+ md←''
+ md,←⊂'# List of issues for ',ns.owner,'/',ns.repo,' (',(⍕≢data),')'
+ md,←⊂''
+ :For row :In ↓data
+     ⍝{⍵:.}663=⊃row   ⍝TODO⍝
+     md,←⊂'## Issue number #',⍕i.number⊃row
+     md,←⊂''
+     md,←⊂i.title⊃row
+     md,←⊂''
+     md,←⊂(ns.collapse/'!> '),'### Details'
+     md,←⊂(ns.collapse/'=> '),'| Created by | ',i.creator⊃row
+     md,←⊂(ns.collapse/'=> '),'| Created at | ',i.created_at⊃row
+     md,←⊂(ns.collapse/'=> '),'| Last update at | ',i.updated_at⊃row
+     md,←⊂(ns.collapse/'=> '),'| Labels | ',i.labels⊃row
+     md,←⊂(ns.collapse/'=> '),'| No. of comments | ',⍕i.comments⊃row
+     md,←⊂(ns.collapse/'=> '),'| Assignees | ',i.assignee⊃row
+     md,←⊂ns.collapse/'=> '
+     :If 0<≢body←i.body⊃row
+         md,←⊂(ns.collapse/'!> '),'### Reasoning'
+         md,←(⊂ns.collapse/'=> '),¨MassageBody body
+     :Else
+         md,←MassageBody body
+     :EndIf
+     md,←⊂''
+     md,←⊂'<',(i.html_url⊃row),'>'
+     md,←⊂''
+ :EndFor
+ parms←MarkAPL.CreateParms
+ parms.outputFilename←ns.filename
+ parms.toc←2 2
+ parms.cssURL←MarkAPL.##.TatinVars.GetFullPath2AssetsFolder
+ parms.title←'Issues'
+ parms.verbose←0
+ (html ns2)←parms MarkAPL.Markdown2HTML md
+ filename←ns.filename
+⍝Done

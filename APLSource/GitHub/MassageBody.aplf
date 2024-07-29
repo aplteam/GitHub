@@ -1,0 +1,7 @@
+ rows←MassageBody rows;b;ind
+ rows~¨←⎕UCS 10
+ :If '#'∊⊃¨rows
+     ⍝ Convert headers: 1→3, 2→4, 3→5, 4→6:
+     rows←'^####' '^### ' '^## ' '^# '⎕R'###### ' '##### ' '#### ' '### '⊣rows
+ :EndIf
+⍝Done

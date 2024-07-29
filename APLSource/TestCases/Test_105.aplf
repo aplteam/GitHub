@@ -1,0 +1,20 @@
+ R←Test_105(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;html;cfgFilename
+⍝ Exercise ]GitHub.ListRepos without specifying a owner (should use the default owner)
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename
+
+ stop←0
+ (rc msg filename)←stop UCMD'ListIssues ''Tatin'' -html -collapse'
+ →T.GoToTidyUp rc≠0
+ html←⊃⎕NGET filename 1
+ →T.GoToTidyUp~(⊂'<div class="accordion">')∊html
+
+ R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile filename
+ {}##.GitHub.FilesAndDirs.DeleteFile cfgFilename
+⍝Done

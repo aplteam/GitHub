@@ -1,0 +1,30 @@
+ r←ListIssues ns;G;list;qdmx;md;row;i;parms;html;ns2;ind
+ :Trap 11
+     G←⎕NEW GitHubAPIv3(,⊂ns.owner)
+ :Else
+     0 Assert⍨'Owner <',ns.owner,'> is unknown'
+ :EndTrap
+ :Trap 11
+     list←G.GetAllIssues ns.repo
+ :Else
+     qdmx←⎕DMX
+     ('<',ns.owner,'/',ns.repo,'> unknown (404)')Assert'Not Found (404)'≢qdmx.EM
+     qdmx.EM Assert 0
+ :EndTrap
+ :If 0=≢list
+     r←''
+ :Else
+     :If ns.verbose
+         r←ListIssues_CollectData_Verbose list
+     :ElseIf ns.html
+         (r i)←ListIssues_CollectData_HTML list
+         :If 0=≢ns.filename
+             ns.filename←'.html'FilesAndDirs.GetTempFilename2'IssueList'
+         :EndIf
+         r←ListIssues_CreateHTML r ns i
+     :Else
+         r←↑list.(number title)
+         r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'No.' 'Title')⍪r
+     :EndIf
+ :EndIf
+⍝Done

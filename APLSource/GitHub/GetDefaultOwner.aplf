@@ -1,0 +1,7 @@
+ r←GetDefaultOwner;configFilename;data
+ configFilename←GetPathToConfig,'github-config.json5'
+ ('There is no default owner defined in ',configFilename)Assert ⎕NEXISTS configFilename
+ data←⊃⎕NGET configFilename
+ data←⎕JSON⍠('Dialect' 'JSON5')⊣data
+ r←data.owner
+⍝Done

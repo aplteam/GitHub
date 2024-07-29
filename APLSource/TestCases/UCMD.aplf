@@ -1,0 +1,13 @@
+ (rc msg data)←{stop}UCMD command
+ stop←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'stop'
+ rc←0 ⋄ msg←data←''
+ :Trap 0
+     :If stop
+         ((1+⊃⎕LC),⎕STOP⊃⎕XSI)⎕STOP⊃⎕XSI
+
+     :EndIf
+     data←⎕SE.UCMD'GitHub.',command
+ :Else
+     rc←⎕EN
+     msg←⎕DM
+ :EndTrap

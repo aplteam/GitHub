@@ -1,0 +1,4 @@
+ Initial;cfgFilename
+ cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ (cfgFilename,'.renamed-by-GitHub-tests')⎕NMOVE cfgFilename
+ ⍝Done

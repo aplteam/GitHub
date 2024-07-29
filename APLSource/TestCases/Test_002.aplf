@@ -1,0 +1,13 @@
+ R←Test_002(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
+⍝ Exercise ]GitHub.ListRepos for a non-exisent user
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg list)←stop UCMD'ListRepos ''DoesNotExistIHope'''
+ →T.PassesIf rc≠0
+ →T.PassesIf 0=≢list
+ →T.PassesIf∨/'Command Execution Failed: <DoesNotExistIHope> unknown (404)'⍷∊msg
+
+ R←T._OK
+⍝Done

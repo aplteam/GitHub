@@ -1,0 +1,20 @@
+ R←Test_004(stopFlag batchFlag);⎕TRAP;rc;msg;stop;cfgFilename;data;json
+⍝ Exercise ]GitHub.ListRepos with the -permanent flag
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ (⊂'{owner: "firlefanz",}')⎕NPUT cfgFilename
+
+ stop←0
+ (rc msg data)←stop UCMD'ListRepos ''aplteam'' -permanent'
+ →T.GoToTidyUp rc≠0
+ json←⊃⎕NGET cfgFilename
+ data←⎕JSON⍠('Dialect' 'JSON5')⊣json
+ →T.GoToTidyUp'aplteam'≢data.owner
+
+ R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile cfgFilename
+⍝Done

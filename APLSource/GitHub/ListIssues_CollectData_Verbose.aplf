@@ -1,0 +1,11 @@
+ r←ListIssues_CollectData_Verbose list;i;ind
+ r←↑list.(number title labels user.login created_at comments assignee)
+ i←⎕NS''
+ i.(number title labels creator created_at comments assignee)←⍳7
+ r[;i.labels]←{0=≢⍵:⍵ ⋄ ⊃{⍺,',',⍵}/⍵.name}¨r[;i.labels]         ⍝ Convert lables
+ r[⍸(⊂'null')∘≡¨r[;i.created_at];i.created_at]←⊂''             ⍝ Convert NULL to ''
+ r[;i.created_at]←{⍵[(⍳10)]}¨r[;i.created_at]                   ⍝ Convert the date to YYYY-MM-DD
+ r[;i.assignee]←r[⍸'null'∘≡¨⊃¨r[;i.assignee];i.assignee]←⊂''   ⍝ Convert NULL to ''
+ r[⍸r[;i.comments]=0;i.comments]←⊂''                            ⍝ Replace 0 by ''
+ r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'No.' 'Title' 'Label(s)' 'Creator' 'Created at' '≢⍝' 'Assignee')⍪r
+⍝Done
