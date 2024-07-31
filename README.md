@@ -60,6 +60,11 @@ Get a detailed list with all issues for the project "aplteam/tatin":
 
 Create a full-blown HTML report on all issues for a project:
 
-<https://htmlpreview.github.io/?https://github.com/aplteam/GitHub/master/html/Issues.html>
+```
+]GitHub.ListIssues aplteam tatin -html -collapse -filename="/path/2/Issues.html"
+```
+This statement creates this file:
+
+[/path/2/Issues.html](<https://htmlpreview.github.io/?https://github.com/aplteam/GitHub/master/html/Issues.html>)
 
 
