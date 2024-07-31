@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior:smooth" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>Issues</title>
+<style media="screen">
+html{-webkit-text-size-adjust:100%;}body{margin:0;}main{display:block;}h1{margin:0.67em 0;}hr{box-sizing:content-box;height:0;overflow:visible;}pre{font-family:monospace, monospace;}a{background-color:transparent;}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted;}b,strong{font-weight:bolder;}code,kbd,samp{font-family:monospace, monospace;font-size:1em;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sub{bottom:-0.25em;}sup{top:-0.5em;}img{border-style:none;}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0;}button,input{overflow:visible;}button,select{text-transform:none;}button,[type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style:none;padding:0;}button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline:1px dotted ButtonText;}fieldset{padding:0.35em 0.75em 0.625em;}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal;}progress{vertical-align:baseline;}textarea{overflow:auto;}[type="checkbox"],[type="radio"]{box-sizing:border-box;padding:0;}[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height:auto;}[type="search"]{-webkit-appearance:textfield;outline-offset:-2px;}[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit;}details{display:block;}summary{display:list-item;}template{display:none;}[hidden]{display:none;}body{margin:0;font-family:Verdana, Arial, "Liberation Sans", sans-serif;background-color:#323232;font-size:16px;max-width:900px;padding:0.83em;color:#DDD;margin-left:auto;margin-right:auto;overflow-wrap:break-word;line-height:1.4;}h1,h2,h3,h4,h5,h6{color:hsl(39,97%,83%);padding-left:0;}h1,h2,h3,h4{margin-bottom:0.88em;}h1{font-size:1.5em;margin:0.27em 0 1.11em 0;}h1 > code,h2 > code,h3 > code,h4 > code,h5 > code,h6 > code{font-size:1em;background-color:inherit;}h2{font-size:1.35em;margin:0.55em 0 0.55em 0;padding-top:0.55em;border-bottom:1px solid Silver;}nav h2{font-size:1.20em;margin:0 0 0.75em 0;}h3{margin:0;margin-top:0.75em;font-size:1.25em;}h4{font-size:1.2em;margin:0;margin-top:0.75em;}h5{font-size:1.15em;margin:0;margin-top:0.60em;padding:0;}h6{font-size:1em;margin:0;margin-top:0.60em;padding:0;}hr{border:0;border-top:1px solid silver;}a{color:#A3A3FF;margin:0;padding:0;vertical-align:baseline;}a:visited{color:hsl(270,70%,85%);}a:visited code{color:hsl(270,70%,85%);}a.autoheader_anchor{text-decoration:none;}img{margin-top:0.55em;margin-bottom:0.27em;}ul{list-style-type:disc;}dd{padding-top:0.25em;}p.first_dd{padding-top:0.25em;}li > ul,li > ol{padding-bottom:0;}li{margin-left:1.38em;margin-bottom:0.5em;}ul > li{margin-left:2.5em;}ol > li{margin-left:2.5em;}li ul{margin-left:0.55em;}li ul{margin-left:0.27em;}li p{padding:1px 0 0 0;margin:0.55em 0 0.27em 0;}ul, ol{padding:0;margin:0.5em -0.6em;}ul ul,ul ol,ol ol,ol ul{margin-top:0.5em;margin-left:-0.6em;}p{padding:0.6em 0 0 0;margin:0;}pre{position:relative;overflow:auto;padding:0.55em 0.35em 0.55em 0.35em;margin:0.55em 0 0.55em 0 !important;background-color:#1A1A1A;-moz-tab-size:4;tab-size:4;-o-tab-size:4;display:block;font-family:APLFont, monospace;-webkit-hyphens:none;-ms-hyphens:none;hyphens:none;border:1px solid silver;line-height:1;border-radius:5px;}pre > code{line-height:1.2;border:0;padding:0;margin:0;background-color:inherit;font-weight:normal;white-space:pre-wrap;}th code ,td code{color:#8B0000;background-color:inherit;padding:0.02em 0.3em;border-radius:5px;border:1px solid #737373;}a code{padding:0;font-size:1em;background-color:inherit;color:inherit;}nav code{background-color:inherit;font-weight:400;}code{font-family:APLFont, monospace;color:#FFC266;background-color:#1A1A1A;line-height:1.4;white-space:nowrap;margin:0 0.2em 0 0.2em;padding:0.02em 0.3em;border-radius:5px;}tbody tr:nth-child(even){background-color:#DAA520;border-bottom:0px solid silver;}tbody tr:nth-child(odd){background-color:#E6BD56;border-bottom:0px solid silver;}th{background-color:#C3941D;color:black;border-bottom:0px solid silver;}th, td{padding:0.3em 0.8em;font-weight:normal;}table td + td{border-left:0px solid silver;border-bottom:0px solid silver;}table th + th{border-left:0px solid silver;border-bottom:0px solid silver;}table{margin:0.75em 0;border-collapse:collapse;font-family:APLFont;font-size:1em;line-height:1.0;border:2px solid Black;}table a{color:blue;}table a:visited{color:blue;}thead th{color:black;background-color:#B68A1B;}td{color:black;}tfoot td{color:black;background-color:#B68A1B;}li > table{margin:0.55em 0 0.55em 0;}tr{margin:1.11em;}blockquote{border-left:0.27em solid silver;padding:0 0.25em;margin:0.5em 0.25em 0.80em 0.5em;}blockquote p:first-child{padding-top:0;}blockquote p:last-child{padding-bottom:0;}blockquote p{padding:0.25em;}blockquote ul li{margin-left:1.38em;}blockquote ol li{margin-left:1.38em;}li > blockquote{margin-left:0;}nav{background-color:#4C4C4C;border:1px solid Silver;padding:0.55em;margin:0.50em 0 1em 0;margin-right:0;overflow:hidden;font-size:1em;}nav#main_nav{width:auto;}nav ul{list-style-type:None;margin:0 1em 0.11em 0;padding:0;}nav ul,nav ul{margin-left:2em;}nav > ul ul{margin-left:2em;}nav a{color:#EDEDED;}nav a:visited{color:#B0B0B0;}nav ul li{margin:0 0 0.16em 0;}nav li p{margin:0;padding:0;line-height:1;margin:0;padding:0;}nav li{line-height:1.5;padding:0;margin-top:0;margin-bottom:0;margin-left:2em;}nav p{font-weight:bold;font-size:1em;padding-top:0;margin-bottom:0.5em;}dl{margin-top:0.1em;margin-bottom:0.1em;}dt{margin-top:0.75em;margin-bottom:0.1em;font-weight:bold;}.toc-container{height:auto;margin:0;padding:0.5em 0.5em 0 0;}nav h2{font-size:1.5em;margin:0.27em 1em 0.27em 1em;}div.toc-container ul{margin-left:0.5em;margin-right:1em;padding-left:1em;}[type="checkbox"]{position:absolute;left:-9999px;}label{display:block;width:100%;height:1.1em;cursor:pointer;top:0;padding-left:1em;}div#footnotes_div p{line-height:1.2;padding-bottom:0;padding-top:0;}div#footnotes_div ol{padding-top:0;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("https://misc.aplteam.com/apl385.ttf") format("truetype");}.hide{transition:opacity 400ms, display 400ms;opacity:0;display:none;}.red{color:red;}.center{text-align:center;margin-left:auto;margin-right:auto;}.left{text-align:left;margin-right:0;}.right{text-align:right;margin-left:0;}.print_only{display:none;}div.leanpub{padding:0.83em 0.55em 1.11em 0;margin:0.55em 0 0 0.27em;overflow:auto;display:grid;grid-template-columns:auto 1fr;grid-gap:10px;}div.leanpub p:first-child,div.leanpub h1:first-child,div.leanpub h2:first-child,div.leanpub h3:first-child,div.leanpub ul:first-child,div.leanpub ol:first-child{padding-top:0;}div.leanpub_A{border:1px solid black;background-color:#4C004C;padding:0.55em;margin:1.11em 0 0.83em 0;color:#DDD;}div.leanpub h3,div.leanpub_A h3{font-size:1.2em;padding:0;margin:0;}div.leanpub h4,div.leanpub_A h4{font-size:1.1em;padding:0.27em 0 0 0;margin:0;}div.leanpub h5,div.leanpub h5{font-size:1.0em;padding:0.27em 0 0 0;margin:0;}div.leanpub_A h5,div.leanpub_A h5{font-size:1.0em;padding:0.27em 0 0 0;margin:0;}div.leanpub_A > p:first-child{padding-top:0;margin-top:0;}div.leanpub img{float:left;padding:0.5em;margin:0.5em 1em 0 0;clear:both;background-color:#CCCCFF;}div.leanpub tbody *{background-color:transparent;}div.leanpub p{padding:0.17em 0 0 0;margin:0;}span.leanpub_code{color:Red;}div.leanpub p{display:block;padding:0.44em 0 0 0;}div.leanpub > div{margin-left:3em;}pre[class*="language-"]{position:relative;margin:5px 0;padding:1.75em 0 1.75em 1em;}details summary{cursor:pointer;}details summary > *{display:inline;}div.accordion{border:1px solid silver;padding:0;margin:0.5em 0;background-color:#4C004C;}div.accordion > div{border:1px solid silver;padding:0.5em;margin:0 0;}div.accordion > div p,div.accordion > div ul,div.accordion > div ol,div.accordion > div img,div.accordion > div table{margin-block-end:0.1em;}div.collapsible{border:1px solid silver;padding:0.5em;margin:0.5em 0;background-color:#4C004C;}div.collapsible p,div.collapsible ul,div.collapsible ol,div.collapsible img,div.collapsible table{margin-block-end:0.1em;}ul.checkboxes{list-style:none;margin-left:-2em;padding-left:0;}li{text-indent:0;padding-left:0;line-height:1.4;}ul.checkboxes > li::before{content:"☐ ";}ul.checkboxes > li.checked::before{content:"☒ ";}pre > button{position:absolute;top:5px;right:5px;font-size:0.8em;padding:0.15em;border:1.25px solid #232326;border-top-left-radius:6px;border-top-right-radius:6px;border-bottom-right-radius:6px;border-bottom-left-radius:6px;}pre button:hover{cursor:pointer;background-color:#BCBABB;}#main_nav{position:relative;}#main_nav h2{font-size:1.2em;margin:0;padding:0.5em 0.5em 0em 0.5em;border-bottom:0px solid Silver;}#toc-toggle{position:absolute;top:1.1em;right:1em;border-top-left-radius:6px;border-top-right-radius:6px;border-bottom-right-radius:6px;border-bottom-left-radius:6px;}#toc-list{margin:1em 1em 0.25em 0;}sup, sub{text-decoration:none;}svg{padding:0.5em;background-color:#CCCCFF;}
+</style>
+<style media="print">
+@page{margin:25mm 20mm 25mm 20mm;}body{font-family:Verdana, Arial, "Liberation Sans", sans-serif;font-size:10pt;line-height:1.2;}h1{font-size:150%;}h2{font-size:124%;}h3{font-size:124%;}h4{font-size:116%;}h5{font-size:108%;}h6{font-size:100%;}nav h2{font-size:1em;}h1{margin:0 0 20pt 0;}h2{margin:15pt 0 3pt 0;}h3{margin:10pt 0 0pt 0;}h4{margin:10pt 0 0pt 0;}h5{margin:9pt 0 0pt 0;}h6{margin:9pt 0 0pt 0;}h1,h2,h3,h4,h5,h6{color:black;font-family:"Arial", "Sans";page-break-after:avoid;}h1 > code,h2 > code,h3 > code,h4 > code,h5 > code,h6 > code{font-size:100%;}h2{border-bottom:1pt solid Silver;padding-bottom:2pt;}.h_tag{page-break-after:avoid;break-after:avoid;}abbr[title]{border-bottom:0;text-decoration:none;}a{color:black;margin:0;padding:0;vertical-align:baseline;text-decoration:none;font-style:italic;}a.autoheader_anchor{text-decoration:none;font-style:normal;page-break-after:avoid;break-after:avoid;}ul{list-style-type:square;}ul, ol{padding:0;margin:0;margin-top:10pt;}li > ul,li > ol{padding-bottom:0;padding-top:0;}li{line-height:1.3;margin:2pt 5pt 2pt 13pt;}ul > li, ol > li{margin:0 0 0 15pt;}li ul{margin-left:5pt;}li ul,li ol{margin:0 3pt 0 3pt;}li p{padding:0;margin:2pt 0;line-height:1.3;}p,ul,ol{line-height:1.2;padding:3pt 0 0 0;margin:0;color:black;}ul,ol{margin-top:0;}pre{padding:3pt 6pt;margin:5pt 0;white-space:pre-wrap;background-color:#FAFAFA;border:1pt Silver solid;display:block;font-family:APLFont, monospace;page-break-inside:avoid;overflow:hidden;line-height:1;}pre code{background-color:#FAFAFA;color:Black;padding:0;margin:0;border:0;white-space:pre-wrap;overflow:hidden;}code{font-family:APLFont, monospace;line-height:1.2;font-size:1em;color:#950000;padding:0 2pt;border:1pt solid silver;white-space:nowrap;margin:0 0.2em 0 0.2em;border-radius:5px;}nav code{font-size:0.9em;}table td + td{border-left:1pt solid silver;}table th + th{border-left:1pt solid silver;}th, td{padding:1pt 5pt;border:1pt solid silver;vertical-align:top;}table code{font-style:normal;padding-left:0;padding-right:0;}table{margin:0.75em 0;font-family:APLFont;font-size:1em;padding:0;border:1pt solid silver;border-collapse:collapse;}li > table{margin:10pt 0 10pt 0;}tr{margin:20pt;}th{font-weight:bold;}tfoot td{font-weight:bold;}tbody tr:nth-child(even) td,thead tr th{border-bottom:1pt solid #949494;}blockquote{border-left:5pt solid silver;padding-left:5pt;margin:8pt 3pt 8pt 8pt;margin:0.5em 0.2em 0.5em 0.5em;}blockquote p{padding:0 0.25em;}nav{background-color:#f8f8f8;border:1pt solid Gray;width:auto;padding:5pt 5pt 5pt 0;margin:5pt 0;overflow:hidden;}nav ul{list-style-type:none;margin:6pt 0 3pt 0;padding:0;}nav ul li{margin-top:3pt;margin-bottom:3pt;}nav li p{margin:0;padding:0;line-height:1;margin:0;padding:0;}nav li{line-height:1;padding:0;margin-top:0;margin-bottom:0;margin-left:8pt;}dl{margin-top:0;margin-bottom:10pt;}dt{margin-top:10pt;margin-bottom:0;font-weight:800;page-break-inside:avoid;}dd{margin-top:2pt;}label#hide_toc_label{font-size:65%;}.toc-container{background-color:inherit;}.toc-container h3{margin:0 0 2pt 7pt;}[type="checkbox"]{display:none;}label{display:block;width:100%;height:1.1em;top:0;padding-left:10pt;}a.external_link::before{content:" 🔗 ";}a.bookmark_link::before{content:" ➯";}a.mailto_link::before{content:" ✉"}nav a.bookmark_link{font-style:normal;}nav p{margin-left:10pt;font-weight:bold;font-size:0.85em;}nav a{font-style:normal;}nav a.bookmark_link::before{content:"";}div#footnotes_div a::before{content:"";}div#footnotes_div a{font-style:normal;}div#footnotes_div{page-break-inside:avoid;}@font-face{font-family:"APLFont";src:local("APL385 Unicode"), url("https://misc.aplteam.com/apl385.ttf") format("truetype");}.no_print{display:none;}.print{display:block;}.red{color:red;}.center{text-align:center;margin:0 auto;}.left{text-align:left;margin-right:0;}.right{text-align:right;margin-left:0;}.avoid_page_break{page-break-inside:avoid;}.page_break_before{page-break-before:always;}div.leanpub{margin:10pt 0 10pt 8pt;page-break-inside:avoid;display:grid;grid-template-columns:auto 1fr;grid-gap:10pt;align-items:top;}div.leanpub_A{border:1pt solid black;background-color:#f9f9f9;padding:5pt;margin:10pt 0 10pt 0;page-break-inside:avoid;}div.leanpub h3,div.leanpub_A h3{font-size:1.2em;padding:3pt 0 0 0;margin:0;}div.leanpub h4,div.leanpub_A h4{font-size:1.1em;padding:3pt 0 0 0;margin:0;}div.leanpub h5,div.leanpub h5{font-size:1.0em;padding:3pt 0 0 0;margin:0;}div.leanpub_A h5,div.leanpub_A h5{font-size:1.0em;padding:3pt 0 0 0;margin:0;}div.leanpub img{padding:0;margin:0 10pt 2pt 0;}div.leanpub_A > p:first-child{padding-top:0;margin-top:0;}div.leanpub > div > h1:first-child{padding-top:5pt;}div.leanpub img{float:left;padding:0;margin:5pt 10pt 0 0;clear:both;}span.leanpub_code{font-weight:bold;}div.leanpub p{display:block;padding:3pt 0 0 0;margin:0;}div.leanpub p:first-child,div.leanpub h1:first-child,div.leanpub h2:first-child,div.leanpub h3:first-child,div.leanpub ul:first-child,div.leanpub ol:first-child{padding-top:0;}div.leanpub > div{margin-left:35pt;}sup{font-size:0.75em;line-height:0;position:relative;vertical-align:baseline;top:-0.4em;}pre[class*="language-"]{position:relative;margin:5pt 0;padding:1.75rem 0 1.75rem 1rem;}pre[class*="language-"] button{position:absolute;top:5pt;right:5pt;}div.accordion{padding:0;margin:0.5em 0;}div.accordion > div{border:1pt solid silver;padding:0.5em;margin:0 0;}div.accordion > div p,div.accordion > div ul,div.accordion > div ol,div.accordion > div img,div.accordion > div table{margin-block-end:0.1em;}summary{display:block;}div.collapsible{border:1pt solid silver;padding:0.5em;margin:0.5em 0;}div.collapsible p,div.collapsible ul,div.collapsible ol,div.collapsible img,div.collapsible table{margin-block-end:0.1em;}ul.checkboxes{list-style:none;margin-left:-2rem;padding-left:0;}li{padding-left:1rem;text-indent:0;}ul.checkboxes > li::before{content:"☐ ";}ul.checkboxes > li.checked::before{content:"☒ ";}pre > button{display:none;}#toc-toggle{display:none;}#main_nav h2{margin:0;padding:0.5em 1em;border-bottom:1pt solid silver;}}
+</style>
+
+<script>
+
+// Function that makes sure that all "Collapsibles" are extended (open) when printing
+// We have to make sure that everything is going to be printed
+window.matchMedia("print").addEventListener("change", evt => {
+    if (evt.matches) {
+        elms = document.body.querySelectorAll("details:not([open])");
+        for (e of elms) {
+            e.setAttribute("open", "");
+            e.dataset.wasclosed = "";
+        }
+    } else {
+        elms = document.body.querySelectorAll("details[data-wasclosed]");
+        for (e of elms) {
+            e.removeAttribute("open");
+            delete e.dataset.wasclosed;
+        }
+    }
+})
+// End "PrintingCollapsibles"
+
+
+</script>
+
+</head>
+<body>
+<div class="h_tag">
+<a href="#list-of-issues-for-aplteamtatin" id="list-of-issues-for-aplteamtatin" class="autoheader_anchor">
+<h1 data-id="List-of-issues-for-aplteamtatin">List of issues for aplteam/tatin (24)</h1>
+</a>
+</div>
+<nav id="main_nav" class="toc">
+<h2 id="toc-heading">Table of contents</h2>
+<button id="toc-toggle" aria-controls="toc-list" aria-expanded="false">Show</button>
+
+<div class="toc-container">
+<ul id="toc-list" class="hide print">
+<li class="toc-entry toc-h2"><a href="#issue-number-198">Issue number #198</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-196">Issue number #196</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-192">Issue number #192</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-190">Issue number #190</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-188">Issue number #188</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-185">Issue number #185</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-174">Issue number #174</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-159">Issue number #159</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-157">Issue number #157</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-152">Issue number #152</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-147">Issue number #147</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-143">Issue number #143</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-138">Issue number #138</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-135">Issue number #135</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-128">Issue number #128</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-125">Issue number #125</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-121">Issue number #121</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-115">Issue number #115</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-110">Issue number #110</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-109">Issue number #109</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-107">Issue number #107</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-93">Issue number #93</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-80">Issue number #80</a></li>
+<li class="toc-entry toc-h2"><a href="#issue-number-70">Issue number #70</a>
+</ul>
+</div>
+</nav>
+<div class="h_tag">
+<a href="#issue-number-198" id="issue-number-198" class="autoheader_anchor">
+<h2 data-id="Issue-number-198">Issue number #198</h2>
+</a>
+</div>
+<p>Tatin user command does not work after running ]tatin.updatetatin</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>dyavc</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-07-30</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-30</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>      </td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Tatin user command does not work after running ]tatin.updatetatin</p>
+<ol start="1">
+<li>I install Dyalog 19.0.48959 Unicode 64-bit.</li>
+<li>]activate all )off and restart dyalog</li>
+<li>]tatin.updatetatin</li>
+</ol>
+<p>Your version of Tatin is 0.104.1 Latest published version is 0.112.0 Would you like to download and install 0.112.0 ? (Y/n) Y Tatin successfully updated to version 0.112.0 in C:\Users\[…redacted…] )off and restart dyalog</p>
+<ol start="4">
+<li>⍝  now Tatin does not work ]tatin.version</li>
+</ol>
+<ul>
+<li>Invalid user command; to see a list of all user commands type ] -?
+<p>]tools.version  Dyalog  19.0.48959 64-bit Unicode, BuildID abfdd505  OS      Windows 11 (10.0.22631) 64-bit  Link    4.0.17  SALT    2.915  UCMD    2.6  .NET    .NET Framework 4.8.9241.0  WS      19.0  Tatin   0.112.0  Cider   0.39.0</p></li>
+</ul>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/198" class="external_link">https://github.com/aplteam/Tatin/issues/198</a></p>
+<div class="h_tag">
+<a href="#issue-number-196" id="issue-number-196" class="autoheader_anchor">
+<h2 data-id="Issue-number-196">Issue number #196</h2>
+</a>
+</div>
+<p>ListPackages: Add a flag -latest</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-07-03</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-03</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>When specified the command should return the latest version of every non-deprecated major version number.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/196" class="external_link">https://github.com/aplteam/Tatin/issues/196</a></p>
+<div class="h_tag">
+<a href="#issue-number-192" id="issue-number-192" class="autoheader_anchor">
+<h2 data-id="Issue-number-192">Issue number #192</h2>
+</a>
+</div>
+<p>Consider switching from ZIP to TAR</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-06-05</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-06-20</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>ZIP has significant flaws when it comes to platform compatibility.</p>
+<p>It might be better to use the TAR format for Tatin packages.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/192" class="external_link">https://github.com/aplteam/Tatin/issues/192</a></p>
+<div class="h_tag">
+<a href="#issue-number-190" id="issue-number-190" class="autoheader_anchor">
+<h2 data-id="Issue-number-190">Issue number #190</h2>
+</a>
+</div>
+<p>]UpdateTatin should allow to update to a specific version</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-03-26</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-04-06</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Even if that means to go back to an older version.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/190" class="external_link">https://github.com/aplteam/Tatin/issues/190</a></p>
+<div class="h_tag">
+<a href="#issue-number-188" id="issue-number-188" class="autoheader_anchor">
+<h2 data-id="Issue-number-188">Issue number #188</h2>
+</a>
+</div>
+<p>Bug in InstallPackages and/or ListPackages</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-03-15</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-08</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>bug</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>aplteam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>After installing three packages:</p>
+<pre tabindex="0"><code>]installPackages MarkAPL,FilesAndDirs,A@APLTreeUtils2 install/path/</code></pre>
+<p>executing <code>ListPackages</code>:</p>
+<pre tabindex="0"><code>      ]tatin.ListPackages install/path/
+Package-ID                   Principal
+ ----------                   ---------
+ aplteam-FilesAndDirs-5.7.0   *
+ aplteam-MarkAPL-12.1.1       *
+ aplteam-APLTreeUtils2-1.3.1
+ aplteam-OS-3.1.1</code></pre>
+<p>Two problems here:</p>
+<ol start="1">
+<li>The alias is not mentioned</li>
+<li>APLTreeUtils2 is not marked as a principal package</li>
+</ol>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/188" class="external_link">https://github.com/aplteam/Tatin/issues/188</a></p>
+<div class="h_tag">
+<a href="#issue-number-185" id="issue-number-185" class="autoheader_anchor">
+<h2 data-id="Issue-number-185">Issue number #185</h2>
+</a>
+</div>
+<p>Restrict publishing of packages to known URLs only</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2024-01-25</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-01-25</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Though the user should be allowed to publish to any (local) path, URLs should be rejected in case they are not (yet) known.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/185" class="external_link">https://github.com/aplteam/Tatin/issues/185</a></p>
+<div class="h_tag">
+<a href="#issue-number-174" id="issue-number-174" class="autoheader_anchor">
+<h2 data-id="Issue-number-174">Issue number #174</h2>
+</a>
+</div>
+<p>Allow “watching” packages</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-12-11</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-12-11</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Similiar to GitHub's “watching a project” this should allow a user to watch a particular package, and get notifications of new versions etc.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/174" class="external_link">https://github.com/aplteam/Tatin/issues/174</a></p>
+<div class="h_tag">
+<a href="#issue-number-159" id="issue-number-159" class="autoheader_anchor">
+<h2 data-id="Issue-number-159">Issue number #159</h2>
+</a>
+</div>
+<p>Take WritePackageConfigFile apart</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-11-01</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-11-01</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>technical debt</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p><code>WritePackageConfigFile</code> should be split into two functions:</p>
+<ul>
+<li><code>CheckCfgProperties</code></li>
+<li><code>WritePackageConfigFile_</code></li>
+</ul>
+<p><code>WritePackageConfigFile</code> on the other than should just call these two functions.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/159" class="external_link">https://github.com/aplteam/Tatin/issues/159</a></p>
+<div class="h_tag">
+<a href="#issue-number-157" id="issue-number-157" class="autoheader_anchor">
+<h2 data-id="Issue-number-157">Issue number #157</h2>
+</a>
+</div>
+<p>Generating an API key should be automated</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-11-01</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-11-01</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Currently adding an API key for a (new) group requires manual interaction with the server.</p>
+<p>This should be automated in the sense that a super-user is able to add/replace an API key via a web interface.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/157" class="external_link">https://github.com/aplteam/Tatin/issues/157</a></p>
+<div class="h_tag">
+<a href="#issue-number-152" id="issue-number-152" class="autoheader_anchor">
+<h2 data-id="Issue-number-152">Issue number #152</h2>
+</a>
+</div>
+<p>Suggestion for a page with Package Ideas</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>sloorush</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-10-25</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-05-29</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>[Not reporting an issue but a suggestion]</p>
+<h4>Idea</h4>
+<p>A public place where people can note down and pick up ideas of packages that are needed by the community and what packages they can build.</p>
+<h4>Users</h4>
+<ul>
+<li>People who want to build packages, but do not have any ideas of what might be needed by the community</li>
+<li>People who want a package for something but don't have the time to build one.</li>
+</ul>
+<h4>Implementation</h4>
+<ul>
+<li>A page on the website (customisable but might lack intuitiveness)</li>
+<li>Pinned GitHub issue (reactions and discussions will be easier)</li>
+<li>GitHub discussions tab is also an excellent option (reactions and discussions are appropriately managed, and tree conversations make it kind of a list too)</li>
+<li>A wiki page (easier to maintain a list)</li>
+</ul>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/152" class="external_link">https://github.com/aplteam/Tatin/issues/152</a></p>
+<div class="h_tag">
+<a href="#issue-number-147" id="issue-number-147" class="autoheader_anchor">
+<h2 data-id="Issue-number-147">Issue number #147</h2>
+</a>
+</div>
+<p>Default parameter for ListPackages and PublishPackages</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-10-03</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-06-19</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Currently, when <code>ListPackages</code> and <code>PublishPackage</code> are not provided with a target registry as in:</p>
+<pre tabindex="0"><code>ListPackages</code></pre>
+<p>and</p>
+<pre tabindex="0"><code>PublishPackage /path/2/package/ZIP</code></pre>
+<p>then <code>[tatin]</code> is assumed as the target.</p>
+<p>It can well be argued that instead the Registry with the highest priority should be the target.</p>
+<p>If there is only a single Registry with a priority greater than 0 (that's the default), then it does not make a difference.</p>
+<p>But when the user builds up a chain of Registries, like:</p>
+<pre tabindex="0"><code>Alias         Priority
+============= ========
+[private]     9000
+[test]        4000
+[department]  3000
+[company]     2000
+[tatin]       1000</code></pre>
+<p>then it does make a difference: <code>[private]</code> would then be the default target.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/147" class="external_link">https://github.com/aplteam/Tatin/issues/147</a></p>
+<div class="h_tag">
+<a href="#issue-number-143" id="issue-number-143" class="autoheader_anchor">
+<h2 data-id="Issue-number-143">Issue number #143</h2>
+</a>
+</div>
+<p>Replace current implementation of communication with the Windows Event Log with a NuGet package</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-09-17</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-10-31</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>The current implementation works fine with .NET 3.1 (formerly known as .NET Core).</p>
+<p>It causes for reasons that probably even Microsoft cannot explain a VALUE ERROR after .NET got upgraded to 6.0 (not called .NET Core anymore, so let's call this .NET-not-Framework - tx Microsoft for the clear and well-defined naming that has been so reliably inconsistent over the years.</p>
+<p>Apparently this can be overcome by using the NuGet package called <code>System.Diagnostics.EventLog</code>.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/143" class="external_link">https://github.com/aplteam/Tatin/issues/143</a></p>
+<div class="h_tag">
+<a href="#issue-number-138" id="issue-number-138" class="autoheader_anchor">
+<h2 data-id="Issue-number-138">Issue number #138</h2>
+</a>
+</div>
+<p>Introduce a review mechanism for packages</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-07-13</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-07-13</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>It should allow a review as well as the assignment of 1-5 stars.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/138" class="external_link">https://github.com/aplteam/Tatin/issues/138</a></p>
+<div class="h_tag">
+<a href="#issue-number-135" id="issue-number-135" class="autoheader_anchor">
+<h2 data-id="Issue-number-135">Issue number #135</h2>
+</a>
+</div>
+<p>When multiple packages are to be loaded and the last one fails, none is loaded at all</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-06-18</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-06-18</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>With <code>InstallPackages</code> this might be the right thing to do, but it is less clear with <code>LoadPackages</code>.</p>
+<p>Shouldn't Tatin load everything that did not cause an error and report problems at the very end?</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/135" class="external_link">https://github.com/aplteam/Tatin/issues/135</a></p>
+<div class="h_tag">
+<a href="#issue-number-128" id="issue-number-128" class="autoheader_anchor">
+<h2 data-id="Issue-number-128">Issue number #128</h2>
+</a>
+</div>
+<p>Building a dependency tree has a problem</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-03-29</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-08</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>bug</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>aplteam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>When a package <code>Foo</code> is opened that has dependencies that themselves depend on <code>Foo</code> then things go awry: the principal package is not being taken into account when the build tree is compiled, leading to a wrong result.</p>
+<p>Since this is a pretty rare scenario it did not come to light until recently. <code>CodeCoverage</code> is an example: for development it depends on <code>Tester2</code> which in turn depends on <code>CodeCoverage</code>.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/128" class="external_link">https://github.com/aplteam/Tatin/issues/128</a></p>
+<div class="h_tag">
+<a href="#issue-number-125" id="issue-number-125" class="autoheader_anchor">
+<h2 data-id="Issue-number-125">Issue number #125</h2>
+</a>
+</div>
+<p>“Remove” required</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-03-22</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-08</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>aplteam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Once a package is loaded into either <code>⎕SE._tatin</code> or <code>#._tatin</code> there is no way to get rid of it.</p>
+<p>There is a need for this: when a rarely used and expensive package (in terms of memory usage) is loaded and executed, the user command must be able to get rid of it when it has reason to assume that it is not used anytime soon again.</p>
+<p>It should accept only the names of principal packages, but it should also remove dependencies that are not required by other packages.</p>
+<p>I don't think that this has to be a user command, an API function should suffice.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/125" class="external_link">https://github.com/aplteam/Tatin/issues/125</a></p>
+<div class="h_tag">
+<a href="#issue-number-121" id="issue-number-121" class="autoheader_anchor">
+<h2 data-id="Issue-number-121">Issue number #121</h2>
+</a>
+</div>
+<p>Tatin server: take care of calls to GetAllPackages</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-03-16</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-08</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>improvement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>aplteam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p><code>GetAllPackages</code> should be called only by the compile-index process.</p>
+<p>Everything else that is calling it should use the pre-compiled list instead because that's faster.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/121" class="external_link">https://github.com/aplteam/Tatin/issues/121</a></p>
+<div class="h_tag">
+<a href="#issue-number-115" id="issue-number-115" class="autoheader_anchor">
+<h2 data-id="Issue-number-115">Issue number #115</h2>
+</a>
+</div>
+<p>Tatin newsletter subscription</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2023-02-11</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-02-11</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>Tatin should allow a user to register for a newsletter, announcing new versions, discussing plans, and road maps and maybe even announce newly published (deleted?!) packages.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/115" class="external_link">https://github.com/aplteam/Tatin/issues/115</a></p>
+<div class="h_tag">
+<a href="#issue-number-110" id="issue-number-110" class="autoheader_anchor">
+<h2 data-id="Issue-number-110">Issue number #110</h2>
+</a>
+</div>
+<p>Polish the “Show” links for config files &amp; dependency files in the version list</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2022-12-14</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2023-01-09</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>These links result in new HTML pages. Instead it should be an AJAX request that shows the data in pop-up dialog boxes of sorts.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/110" class="external_link">https://github.com/aplteam/Tatin/issues/110</a></p>
+<div class="h_tag">
+<a href="#issue-number-109" id="issue-number-109" class="autoheader_anchor">
+<h2 data-id="Issue-number-109">Issue number #109</h2>
+</a>
+</div>
+<p>When publishing, check Registries with higher priorities</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2022-12-14</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2024-07-08</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>aplteam</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>When a package is published to a Registry then all Registries with a higher priority should be checked for also having the package published.</p>
+<p>If that is the case the user should be asked for confirmation, or at least a warning should be issued.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/109" class="external_link">https://github.com/aplteam/Tatin/issues/109</a></p>
+<div class="h_tag">
+<a href="#issue-number-107" id="issue-number-107" class="autoheader_anchor">
+<h2 data-id="Issue-number-107">Issue number #107</h2>
+</a>
+</div>
+<p>Publishing packages → the dependency file should say how to create one</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>rikedyp</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2022-11-24</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2022-11-26</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>documentation</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>https://tatin.dev/Assets/docs/PublishingPackages.html#The-dependency-file</p>
+<p>This is mainly a reminder to myself when I start working on the docs. I also think an example workflow of <code>]install</code>ed packages (during development) vs. dependencies (for package publication) should be laid out.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/107" class="external_link">https://github.com/aplteam/Tatin/issues/107</a></p>
+<div class="h_tag">
+<a href="#issue-number-93" id="issue-number-93" class="autoheader_anchor">
+<h2 data-id="Issue-number-93">Issue number #93</h2>
+</a>
+</div>
+<p>The web interface requires a responsive design</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2022-06-06</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2022-10-26</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/93" class="external_link">https://github.com/aplteam/Tatin/issues/93</a></p>
+<div class="h_tag">
+<a href="#issue-number-80" id="issue-number-80" class="autoheader_anchor">
+<h2 data-id="Issue-number-80">Issue number #80</h2>
+</a>
+</div>
+<p>Make ]InstallPackage safer</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2021-12-22</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2021-12-23</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>When only a package name (without group) is passed as argument to <code>]InstallPackage</code> then all known Registries with a priority greater than zero are scanned.</p>
+<p>The problem ist that the user might not be aware of a package with the same name but a different group name available on a server with a higher priority than the intended server.</p>
+<p>Forcing the user to specify a group name would solve the problem but is not very user friendly: if one cannot remember the group name, or the correct spelling, it won't work.</p>
+<p>Instead the user command could tell the user which package Tatin intends to install and ask the user whether that should be installed or scanning should be resumed.</p>
+<p>At the same time it's probably better to remove the possibility to specify just a name without group from the equivalent API function call.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/80" class="external_link">https://github.com/aplteam/Tatin/issues/80</a></p>
+<div class="h_tag">
+<a href="#issue-number-70" id="issue-number-70" class="autoheader_anchor">
+<h2 data-id="Issue-number-70">Issue number #70</h2>
+</a>
+</div>
+<p>Add sorting to the columns of tables</p>
+<div class="accordion">
+<div>
+<details>
+<summary>
+<h3>Details</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<table>
+<tbody>
+<tr>
+<td>Created by</td>
+<td>aplteam</td>
+</tr>
+<tr>
+<td>Created at</td>
+<td>2021-11-01</td>
+</tr>
+<tr>
+<td>Last update at</td>
+<td>2022-06-06</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>enhancement</td>
+</tr>
+<tr>
+<td>No. of comments</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Assignees</td>
+<td>         </td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+</div>
+<div>
+<details>
+<summary>
+<h3>Reasoning</h3>
+</summary>
+<div class="accordion-content">
+<hr>
+<p>If not for all then for some tables that would be really useful feature.</p>
+</div>
+</details>
+</div>
+</div>
+<p><a href="https://github.com/aplteam/Tatin/issues/70" class="external_link">https://github.com/aplteam/Tatin/issues/70</a></p>
+
+<script>
+
+// Adds a "Copy" button to every code block & established the event handler
+const copyButtonLabel = " Copy " ;
+
+let blocks = document.querySelectorAll("pre");
+
+blocks.forEach((block) => {
+  if (navigator.clipboard) {
+    let button = document.createElement("button");
+
+    button.innerText = copyButtonLabel;
+    button.title = "Copies the code block to the clipboard.";
+    block.appendChild(button);
+     
+    button.addEventListener("click", async () => {
+      await copyCode(block, button);
+    });
+  }  
+});  
+
+async function copyCode(block, button) {
+  let code = block.querySelector("code");
+  let text = code.innerText;
+
+  await navigator.clipboard.writeText(text);
+
+  button.innerText = " Copied ";
+
+  setTimeout(() => {
+    button.innerText = copyButtonLabel;
+  }, 700);
+}
+
+
+// Toggle the visibility of the TOC when the "Hide/Show" button is clicked
+const button = document.querySelector("#toc-toggle");
+const content = document.querySelector("#toc-list");
+button.addEventListener("click", toggleTableOfContents);
+function toggleTableOfContents() {
+  content.classList.toggle("hide");
+  if (button.innerText === "Hide") {
+    button.innerText = "Show";
+    button.setAttribute("aria-expanded", false);
+  } else {
+    button.innerText = "Hide";
+    button.setAttribute("aria-expanded", true);
+  }
+}
+
+
+// This makes sure that only one summary is open at any given time
+const All_Details = document.querySelectorAll('details');
+
+All_Details.forEach(deet=>{
+  deet.addEventListener('toggle', toggleOpenOneOnly)
+})
+
+function toggleOpenOneOnly(e) {
+  if (this.open) {
+    All_Details.forEach(deet=>{
+      if (deet!=this && deet.open) deet.open = false
+    });
+  }
+}
+
+</script>
+
+</body>
+</html>
