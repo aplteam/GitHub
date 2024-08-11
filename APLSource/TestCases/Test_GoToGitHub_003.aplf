@@ -1,0 +1,19 @@
+ R←Test_GoToGitHub_003(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
+⍝ Exercise ]GitHub.GoToGitHub with owner and repo is spcial syntax (single text vector)
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest
+     :Return
+ :EndIf
+
+ CommTools.Pause'This test needs you: it will open the homepage of the Test Repo on GitHub'
+
+ stop←0
+ (rc msg)←2↑stop UCMD'GoToGitHub ''aplteam/TestRepo'''
+ →T.PassesIf rc=0
+
+ :If 1 CommTools.YesOrNo'Did https://github.com/aplteam/TestRepo open in your default browser?'
+     R←T._OK
+ :EndIf

@@ -7,6 +7,8 @@
          r,←'Lists all repos for the given owner.'
      :Case ⎕C'ListIssues'
          r,←'Lists all issues for a given project of a given owner.'
+     :Case ⎕C'GoToGitHub'
+         r,←'Opens the homepage of the given repository on GitHub'
      :Case ⎕C'Version'
          r,←'Returns the version numbers of both ]GitHub and the package GitHubAPIv3.'
      :EndSelect
@@ -26,6 +28,8 @@
      :Case ⎕C'ListIssues'
          r,←⊂']ListIssues [owner] <project> -html -collapse -verbose -filename= -permanent'
          r,←⊂''
+         r,←⊂'Alternatively you can specify owner & repo this way: ]GitHub.GoToGitHub aplteam/TestRepo'
+         r,←⊂''
          r,←⊂'Lists all open issues of the given project with issue number and title by default, but check'
          r,←⊂'-verbose and -html'
          r,←⊂''
@@ -39,6 +43,15 @@
          r,←⊂'            Is ignored when -html is specified.'
          r,←⊂'-permanent  Saves the given owner in the configuration file. If no owner is specified and'
          r,←⊂'            this flag is specified then an error is thrown.'
+     :Case ⎕C'GoToGitHub'
+         r,←⊂'Opens the homepage of the given repository on GitHub'
+         r,←⊂''
+         r,←⊂'Notes:'
+         r,←⊂' * You can also specify owner and repo as a single vector: ]GitHub.GoToGitHub aplteam/TestRepo'
+         r,←⊂' * You can put the owner''s home page on display with ]GitHub.GoToGitHub aplteam/'
+         r,←⊂''
+         r,←⊂'The user must specify at least the repository. She may specify both owener and repository'
+         r,←⊂'as two arguments. If she specifies just the repository, the default owner is assumed.'
      :Case ⎕C'Version'
          ∘∘∘
      :EndSelect

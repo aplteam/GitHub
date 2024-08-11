@@ -1,4 +1,4 @@
-﻿:Namespace GitHub_UC
+:Namespace GitHub_UC
 ⍝ This script directs calls to the GitHub user commands to GitHub itself.
 ⍝ It's just an interface that does not do anything by itself.
 ⍝ Version 0.1.0 ⋄ 2024-07-26 ⋄ Kai Jaeger
@@ -24,6 +24,12 @@
       c.(Group Name)←'GitHub' 'ListIssues'
       c.Parse←'2s -verbose -html -filename= -collapse -permanent'
       c.Desc←'Returns a list of open issues for the given owner/project'
+      r,←c
+      
+      c←⎕ns''
+      c.(Group Name)←'GitHub' 'GoToGitHub'
+      c.Parse←'1-2 -permanent'
+      c.Desc←'Opens the homepage of the given repository on GitHub'
       r,←c
      
       c←⎕NS ⍬

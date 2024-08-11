@@ -1,4 +1,4 @@
- R←Test_104(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;html
+ R←Test_ListIssues_004(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;html
 ⍝ Exercise ]GitHub.ListIssues with -html and -collapse
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed

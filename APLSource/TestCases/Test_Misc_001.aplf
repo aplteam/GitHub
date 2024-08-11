@@ -1,4 +1,4 @@
- R←Test_701(stopFlag batchFlag);⎕TRAP;list;name;help
+ R←Test_Misc_001(stopFlag batchFlag);⎕TRAP;list;name;help
 ⍝ Exercise all help functions of ]GitHub
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -12,6 +12,11 @@
 
  :For name :In list~⊂'Version'
      help←⎕SE.UCMD'GitHub.',name,' -??'
+     →T.PassesIf 0<≢help
+ :EndFor
+
+ :For name :In list~⊂'Version'
+     help←⎕SE.UCMD'GitHub.',name,' -?'
      →T.PassesIf 0<≢help
  :EndFor
 

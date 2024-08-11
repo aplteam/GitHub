@@ -1,0 +1,9 @@
+ {r}←GoToGitHub(owner repo);url
+⍝ Opens the homepage of the given repository on GitHub.\\
+ r←⍬
+ url←'https://github.com/',owner,'/',repo
+ :If 'win'≡⎕C APLTreeUtils2.GetOperatingSystem ⍬
+     {}APLTreeUtils2.GoToWebPage url
+ :Else
+     ⎕←']Open ',url
+ :EndIf

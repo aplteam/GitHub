@@ -1,4 +1,4 @@
- R←Test_001(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
+ R←Test_ListRepos_001(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
 ⍝ Exercise ]GitHub.ListRepos
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -7,6 +7,7 @@
  (rc msg list)←stop UCMD'ListRepos ''aplteam'''
  →T.PassesIf rc=0
  →T.PassesIf 2=⍴⍴list
+ →T.PassesIf 1=2⊃⍴list
  →T.PassesIf 10<≢list
 
  R←T._OK

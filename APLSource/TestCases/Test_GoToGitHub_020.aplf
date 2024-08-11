@@ -1,0 +1,29 @@
+ R←Test_GoToGitHub_020(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop;cfgFilename;json;data
+⍝ Exercise ]GitHub.GoToGitHub with the -permanent flag
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest
+     :Return
+ :EndIf
+
+ cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ (⊂'{owner: "firlefanz",}')⎕NPUT cfgFilename
+
+ CommTools.Pause'This test needs you: it will open the homepage of the Test Repo on GitHub'
+
+ stop←0
+ (rc msg)←2↑stop UCMD'GoToGitHub ''aplteam'' ''TestRepo'' -permanent'
+ →T.GoToTidyUp rc≠0
+ json←⊃⎕NGET cfgFilename
+ data←⎕JSON⍠('Dialect' 'JSON5')⊣json
+ →T.GoToTidyUp'aplteam'≢data.owner
+
+ :If 1 CommTools.YesOrNo'Did https://github.com/aplteam/TestRepo open in your default browser?'
+     R←T._OK
+ :EndIf
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile cfgFilename
+⍝Done

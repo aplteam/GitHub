@@ -1,4 +1,4 @@
- R←Test_801(stopFlag batchFlag);⎕TRAP;list
+ R←Test_Misc_002(stopFlag batchFlag);⎕TRAP;list
 ⍝ Exercise the `Public` function
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed

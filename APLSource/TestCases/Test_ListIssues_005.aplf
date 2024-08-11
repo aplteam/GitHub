@@ -1,4 +1,4 @@
- R←Test_105(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;html;cfgFilename
+ R←Test_ListIssues_005(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;html;cfgFilename
 ⍝ Exercise ]GitHub.ListRepos without specifying a owner (should use the default owner)
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
