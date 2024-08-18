@@ -48,7 +48,7 @@
      parms.owner←''Args.Switch'_1'
      parms.repo←''Args.Switch'_2'
      :If '/'∊parms.owner
-         parms.(owner repo)←2↑('/'(≠⊆⊢)parms.owner),⊂''
+         parms.(owner repo)←{⍵{((⍵-1)↑⍺)(⍵↓⍺)}⍵⍳'/'}parms.owner
      :ElseIf 0=≢parms.repo
          parms.repo←parms.owner
          parms.owner←''

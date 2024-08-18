@@ -28,7 +28,7 @@
       
       c←⎕ns''
       c.(Group Name)←'GitHub' 'GoToGitHub'
-      c.Parse←'1-2 -permanent'
+      c.Parse←'0-2 -permanent'
       c.Desc←'Opens the homepage of the given repository on GitHub'
       r,←c
      

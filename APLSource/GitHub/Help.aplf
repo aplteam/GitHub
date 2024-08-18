@@ -50,8 +50,10 @@
          r,←⊂' * You can also specify owner and repo as a single vector: ]GitHub.GoToGitHub aplteam/TestRepo'
          r,←⊂' * You can put the owner''s home page on display with ]GitHub.GoToGitHub aplteam/'
          r,←⊂''
-         r,←⊂'The user must specify at least the repository. She may specify both owener and repository'
+         r,←⊂'The user must specify at least the repository. She may specify both owner and repository'
          r,←⊂'as two arguments. If she specifies just the repository, the default owner is assumed.'
+         r,←⊂'You may also add more levels, for example: ]GoToGitHub <owner>/<repo>/issues/1 or'
+         r,←⊂']GoToGitHub <owner> <repo>/issues/1'
      :Case ⎕C'Version'
          ∘∘∘
      :EndSelect
