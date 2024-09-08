@@ -1,4 +1,4 @@
- r←Run(Cmd Args);folder;P;⎕TRAP;aplVersion;SourceFile;parms
+ r←Run(Cmd Args);folder;P;⎕TRAP;aplVersion;SourceFile;parms;list;ind
  r←0 0⍴''
  SourceFile←GetSourceFilename⊃⎕RSI
  :Select ⎕C Cmd
@@ -55,6 +55,18 @@
      :EndIf
      :If 0=≢parms.owner
          parms.owner←GetDefaultOwner
+     :EndIf
+     :If 0=≢parms.repo
+     :AndIf 9=⎕SE.⎕NC'Cider'
+     :AndIf 0<≢list←{⍵[;1]}⎕SE.Cider.ListOpenProjects 0
+         list←{⊃¯1↑'.'(≠⊆⊢)⍵}¨list
+         list,←⊂parms.owner,'''s home page on GitHub'
+         ind←'SelGo2GitHub@Select repository to go to on GitHub:'CommTools.Select list
+         :If 0=≢ind
+             →0 ⋄ r←'Cancelled by user'
+         :ElseIf ind<≢list
+             parms.repo←ind⊃list
+         :EndIf
      :EndIf
      :If parms.permanent
          'You must specify an owner with -permanent'Assert 0<≢parms.owner
