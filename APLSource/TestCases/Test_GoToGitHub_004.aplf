@@ -10,10 +10,15 @@
 
  CommTools.Pause'This test needs you: it will open the homepage of aplteam on GitHub'
 
+ CommTools.Select_Choices←1 2⍴'SelGo2GitHub@Select repository to go to on GitHub:' 'GitHub'
+
  stop←0
  (rc msg)←2↑stop UCMD'GoToGitHub ''aplteam/'''
- →T.PassesIf rc=0
+ →T.GoToTidyUp rc≠0
 
  :If 1 CommTools.YesOrNo'Did https://github.com/aplteam open in your default browser?'
      R←T._OK
  :EndIf
+
+∆TidyUp:
+ CommTools.Cleanup
