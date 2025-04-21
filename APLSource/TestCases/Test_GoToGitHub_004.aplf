@@ -10,7 +10,7 @@
 
  CommTools.Pause'This test needs you: it will open the homepage of aplteam on GitHub'
 
- CommTools.Select_Choices←1 2⍴'SelGo2GitHub@Select repository to go to on GitHub:' 'GitHub'
+ CommTools.AddAutomation 'Select' 'SelGo2GitHub@Select repository to go to on GitHub:' 'GitHub'
 
  stop←0
  (rc msg)←2↑stop UCMD'GoToGitHub ''aplteam/'''
