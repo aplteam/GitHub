@@ -2,6 +2,7 @@
 ⍝
  :Trap 11
      G←⎕NEW GitHubAPIv3(,⊂parms.owner)
+     G.personal_access_token←parms.accessToken
  :Else
      0 Assert⍨'Owner <',parms.owner,'> is unknown'
  :EndTrap
@@ -21,6 +22,15 @@
              r←(0<list.open_issues_count)⌿r
          :EndIf
          r[⍸(⊂'null')∘≡¨r[;3];3]←' '
+         :If 0<≢parms.sort
+             :If parms.sort≡'name'
+                 r←r[⍋r[;1];]
+             :ElseIf parms.sort≡'issues'
+                 r←r[⍒r[;2];]
+             :Else
+                 ∘∘∘ ⍝ Huh?!
+             :EndIf
+         :EndIf
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'Name' 'OI (*)' 'Description'),[1]r
          r⍪←↑(' ' ' ' ' ')('* Open issues' ' ' ' ')
          r[⍸0≡¨r[;2];2]←⊂''

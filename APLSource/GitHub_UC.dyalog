@@ -16,7 +16,7 @@
      
       c←⎕NS ⍬
       c.(Group Name)←'GitHub' 'ListRepos'
-      c.Parse←'1s -verbose -permanent -issues'
+      c.Parse←'1s -verbose -permanent -issues -sort=name issues'
       c.Desc←'Returns a list with all repositories for "owner"'
       r,←c
      

@@ -1,6 +1,7 @@
  r←ListIssues ns;G;list;qdmx;md;row;i;parms;html;ns2;ind
  :Trap 11
      G←⎕NEW GitHubAPIv3(,⊂ns.owner)
+     G.personal_access_token←ns.accessToken
  :Else
      0 Assert⍨'Owner <',ns.owner,'> is unknown'
  :EndTrap

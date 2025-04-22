@@ -7,12 +7,14 @@
      parms.permanent←Args.Switch'permanent'
      parms.verbose←Args.Switch'verbose'
      parms.issues←0 Args.Switch'issues'
+     parms.sort←''Args.Switch'sort'
      parms.owner←''Args.Switch'_1'
      :If parms.permanent
          'You must specify an owner with -permanent'Assert 0<≢parms.owner
      :ElseIf 0=≢parms.owner
          parms.owner←GetDefaultOwner
      :EndIf
+     parms.accessToken←GetAccessToken
      r←ListRepos parms
      :If parms.permanent
          SaveDefaultOwner parms.owner
@@ -22,6 +24,7 @@
      parms.permanent←Args.Switch'permanent'
      parms.owner←''Args.Switch'_1'
      parms.repo←''Args.Switch'_2'
+     parms.accessToken←GetAccessToken
      :If '/'∊parms.owner
          parms.(owner repo)←2↑('/'(≠⊆⊢)parms.owner),⊂''
      :ElseIf 0=≢parms.repo

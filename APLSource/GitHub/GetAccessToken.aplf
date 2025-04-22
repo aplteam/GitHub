@@ -1,0 +1,15 @@
+ r←GetAccessToken;configFilename;data
+⍝ First this tries to access any environment variable "GITHUB_ACCESS_TOKEN".
+⍝ If that does not exist it tries to find "access_token" in the config file.
+ :If 'Win'≡APLTreeUtils2.GetOperatingSystem ⍬
+     r←{⍵≡'%GITHUB_ACCESS_TOKEN%':'' ⋄ ⍵}⊃⎕SH'echo %GITHUB_ACCESS_TOKEN%'
+ :Else
+     r←{⍵≡'$GITHUB_ACCESS_TOKEN':'' ⋄ ⍵}⊃⎕SH'echo $GITHUB_ACCESS_TOKEN'
+ :EndIf
+ :If 0=≢r
+     configFilename←GetPathToConfig,'github-config.json5'
+     data←⊃⎕NGET configFilename
+     data←⎕JSON⍠('Dialect' 'JSON5')⊣data
+ :AndIf 0<data.⎕NC'access_token'
+     r←data.access_token
+ :EndIf
