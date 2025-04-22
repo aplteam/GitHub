@@ -1,5 +1,6 @@
 (
- '* 0.15.0 ⋄ 2025-04-21'
+ '* 0.15.0 ⋄ 2025-04-22'
+ '  * `ListRepos` now honours a flag `issues`'
  '  * `Version` returns the version number from the package config file as a char vector'
  '  * Packages updated'
  '* 0.14.0 ⋄ 2024-09-08'

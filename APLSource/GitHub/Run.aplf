@@ -6,6 +6,7 @@
      parms←⎕NS''
      parms.permanent←Args.Switch'permanent'
      parms.verbose←Args.Switch'verbose'
+     parms.issues←0 Args.Switch'issues'
      parms.owner←''Args.Switch'_1'
      :If parms.permanent
          'You must specify an owner with -permanent'Assert 0<≢parms.owner

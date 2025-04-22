@@ -17,11 +17,19 @@
  :Else
      :If parms.verbose
          r←↑list.(name open_issues_count description)
+         :If parms.issues
+             r←(0<list.open_issues_count)⌿r
+         :EndIf
+         r[⍸(⊂'null')∘≡¨r[;3];3]←' '
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'Name' 'OI (*)' 'Description'),[1]r
          r⍪←↑(' ' ' ' ' ')('* Open issues' ' ' ' ')
          r[⍸0≡¨r[;2];2]←⊂''
      :Else
-         r←⍪list.name
+         :If parms.issues
+             r←(0<list.open_issues_count)⌿⍪list.name
+         :Else
+             r←⍪list.name
+         :EndIf
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵},⊂'Name (',(⍕≢r),')'),[1]r
      :EndIf
  :EndIf
