@@ -1,0 +1,14 @@
+ R←Test_ListRepos_022(stopFlag batchFlag);⎕TRAP;rc;msg;stop;data;alph
+⍝ Exercise ]GitHub.ListRepos with -v but without -sort=
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg data)←stop UCMD'ListRepos ''aplteam'' -verbose'
+ →T.PassesIf 0=rc
+ →T.PassesIf 3=2⊃⍴data
+ alph←↑'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz'
+ →T.PassesIf{⍵[;1]≡⍵[alph⍋↑⍵[;1];1]}¯2↓2↓data
+
+ R←T._OK
+⍝Done

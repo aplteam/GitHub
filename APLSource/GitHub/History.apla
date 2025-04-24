@@ -1,6 +1,8 @@
 (
- '* 0.15.0 ⋄ 2025-04-22'
+ '* 0.15.0 ⋄ 2025-04-23'
  '  * `ListRepos` now honours a flag `issues`'
+ '  * `ListRepos` now allows to specify the desired sort order with -sort=[name | issues]'
+ '  * Allows the specification of an access token now, either via the config file or as environment variables'
  '  * `Version` returns the version number from the package config file as a char vector'
  '  * Packages updated'
  '* 0.14.0 ⋄ 2024-09-08'

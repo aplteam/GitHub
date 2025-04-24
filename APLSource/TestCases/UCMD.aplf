@@ -4,7 +4,6 @@
  :Trap 0
      :If stop
          ((1+⊃⎕LC),⎕STOP⊃⎕XSI)⎕STOP⊃⎕XSI
-
      :EndIf
      data←⎕SE.UCMD'GitHub.',command
  :Else

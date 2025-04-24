@@ -1,5 +1,6 @@
- r←ListRepos parms;G;list;qdmx
+ r←ListRepos parms;G;list;qdmx;alph
 ⍝
+ alph←↑'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz'
  :Trap 11
      G←⎕NEW GitHubAPIv3(,⊂parms.owner)
      G.personal_access_token←parms.accessToken
@@ -24,12 +25,16 @@
          r[⍸(⊂'null')∘≡¨r[;3];3]←' '
          :If 0<≢parms.sort
              :If parms.sort≡'name'
-                 r←r[⍋r[;1];]
+                 r[alph⍋↑1⌷⍤1⊢r;]
              :ElseIf parms.sort≡'issues'
                  r←r[⍒r[;2];]
              :Else
                  ∘∘∘ ⍝ Huh?!
              :EndIf
+         :ElseIf parms.issues
+             r←r[⍒r[;2];]
+         :Else
+             r←r[alph⍋↑1⌷⍤1⊢r;]
          :EndIf
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'Name' 'OI (*)' 'Description'),[1]r
          r⍪←↑(' ' ' ' ' ')('* Open issues' ' ' ' ')
@@ -39,6 +44,11 @@
              r←(0<list.open_issues_count)⌿⍪list.name
          :Else
              r←⍪list.name
+         :EndIf
+         :If parms.sort≡'issues'
+             r←r[⍒r[;1];]
+         :Else
+             r←r[alph⍋↑1⌷⍤1⊢r;]
          :EndIf
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵},⊂'Name (',(⍕≢r),')'),[1]r
      :EndIf
