@@ -1,11 +1,11 @@
 :Namespace GitHub_UC
 ⍝ This script directs calls to the GitHub user commands to GitHub itself.
 ⍝ It's just an interface that does not do anything by itself.
-⍝ Version 0.2.0 ⋄ 2025-04-22 ⋄ Kai Jaeger
+⍝ Version 0.2.0 ⋄ 2025-04-24 ⋄ Kai Jaeger
 
     ∇ PrintError dummy;msg
-      msg←''
-      :If 3=⎕NC'⎕SE.GitHub.Version'
+      msg←0 0⍴''
+      :If 3≠⎕NC'⎕SE.GitHub.Version'
           msg←' GitHub is not installed correctly. Please remove and install again.'
       :EndIf
       ⎕←msg
@@ -16,7 +16,7 @@
      
       c←⎕NS ⍬
       c.(Group Name)←'GitHub' 'ListRepos'
-      c.Parse←'1s -verbose -permanent -issues -sort=name issues'
+      c.Parse←'1s -verbose -permanent -issues -sort=name issues -forks'
       c.Desc←'Returns a list with all repositories for "owner"'
       r,←c
      

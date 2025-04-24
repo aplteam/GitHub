@@ -1,0 +1,14 @@
+ R←Test_ListRepos_031(stopFlag batchFlag);⎕TRAP;rc;msg;stop;data;alph
+⍝ Exercise ]GitHub.ListRepos with just the -forks and the -vrbose flags
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg data)←stop UCMD'ListRepos ''aplteam'' -forks -verbose'
+ →T.PassesIf 0=rc
+ →T.PassesIf 2=⍴⍴data
+ alph←↑'ABCDEFGHIJKLMNOPQRSTUVWXYZ' 'abcdefghijklmnopqrstuvwxyz'
+ →T.PassesIf{⍵≡⍵[alph⍋↑⍵;]}2↓¯2↓data
+
+ R←T._OK
+⍝Done

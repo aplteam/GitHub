@@ -17,6 +17,11 @@
  :If 0=≢list
      r←''
  :Else
+     :If 0=parms.forks
+         list←(list.fork≡¨⊂⊂'false')⌿list
+     :Else
+         list←(list.fork≡¨⊂⊂'true')⌿list
+     :EndIf
      :If parms.verbose
          r←↑list.(name open_issues_count description)
          :If parms.issues

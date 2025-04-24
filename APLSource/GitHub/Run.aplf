@@ -8,6 +8,7 @@
      parms.verbose←Args.Switch'verbose'
      parms.issues←0 Args.Switch'issues'
      parms.sort←''Args.Switch'sort'
+     parms.forks←0 Args.Switch'forks'
      parms.owner←''Args.Switch'_1'
      :If parms.permanent
          'You must specify an owner with -permanent'Assert 0<≢parms.owner
