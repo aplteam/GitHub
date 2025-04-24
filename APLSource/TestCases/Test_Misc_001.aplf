@@ -8,6 +8,7 @@
  list←↑2↓(⎕UCS 13)(≠⊆⊢)list
  list←(¯1+list[;1]⍳']')↑list
  list←{⍵↑⍨¯1+⍵⍳' '}¨##.GitHub.APLTreeUtils2.DLB↓list
+ list~←⊂'Version'
  →T.PassesIf list ∆LazyMatch ##.GitHub.Public
 
  :For name :In list~⊂'Version'

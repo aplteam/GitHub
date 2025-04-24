@@ -30,7 +30,7 @@
          r[⍸(⊂'null')∘≡¨r[;3];3]←' '
          :If 0<≢parms.sort
              :If parms.sort≡'name'
-                 r[alph⍋↑1⌷⍤1⊢r;]
+                 r←r[alph⍋↑1⌷⍤1⊢r;]
              :ElseIf parms.sort≡'issues'
                  r←r[⍒r[;2];]
              :Else
