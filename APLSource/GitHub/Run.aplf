@@ -81,7 +81,7 @@
          SaveDefaultOwner parms.owner
      :EndIf
  :Case ⎕C'Version'
-     r←↑('GitHub'Version)('GitHubAPIv3'(2⊃GitHubAPIv3.Version))
+     r←↑('GitHub'Version)('GitHubAPIv3'GitHubAPIv3.Version)
  :Else
      ∘∘∘ ⍝ Huh?!
  :EndSelect

@@ -20,5 +20,5 @@
   source: "APLSource/GitHub",
   tags: "apl-github-interface",
   userCommandScript: "APLSource/GitHub_UC.dyalog",
-  version: "0.15.0-beta-9+43",
+  version: "0.15.0-beta-10+44",
 }
