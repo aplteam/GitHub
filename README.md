@@ -98,13 +98,13 @@ Create a full-blown HTML report on all issues for a project:
 ```
 ]GitHub.ListIssues aplteam tatin -html -collapse -filename="/path/2/Issues.html"
 ```
-This statement creates ![this file](./ListOfIssues.png)
+This statement creates ![this file](ListOfIssues.png)
 
 ### Access tokens
 
 All the `]GitHub` user commands are doing is to read public data, so you don't need to worry about authentication, right?! Unfortunately that is not true.
 
-Without authentication, one has only a limited number of tokens available for a day, and when you access GitHub a lot, you might well use them all up.
+Without authentication, you have only a limited number of tokens available per day, and if you access GitHub frequently, you might use them all up.
 
 However, authentication is easy: you need an access token. Once you have that, you can pass it in one of two ways:
 
@@ -121,12 +121,12 @@ In your home directory, there is a folder `.config` which hosts, possibly among 
 
 If the file does not exist yet, create it.
 
-Of course this might not be save to do, depending on your circumstances,
+Of course this might not be safe to do, depending on your circumstances,
 
 #### Environment variable
 
-You might set a variable `GITHUB_ACCESS_TOKEN` so that it holds your access token, and it will be picked up. 
+You can set a variable named `GITHUB_ACCESS_TOKEN` to hold your access token, and it will be picked up. 
 
-This is considerd to be a saver option.
+This is considered to be a safer option.
 
 
