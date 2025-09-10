@@ -56,12 +56,14 @@
          r,←⊂' * You can also specify owner & repo as a single vector: ]GitHub.GoToGitHub aplteam/TestRepo'
          r,←⊂' * You can put the owner''s home page on display with ]GitHub.GoToGitHub aplteam/'
          r,←⊂''
-         r,←⊂'If the user does not specify a repository a list is presented with all currently opened Cider'
-         r,←⊂'projects plus an entry for the owner''s home page on GitHub.'
+         r,←⊂'If the user does not specify a repository, the user command checks whethere there are any'
+         r,←⊂'currently opened Cider projects. If there is just one, it acts on it. If there are multiple'
+         r,←⊂'open Cider projects, the user is asked which one she wants to act on. If there is no open'
+         r,←⊂'Cider project, it will go to the owner''s home page on GitHub.'
          r,←⊂''
          r,←⊂'You may add additional levels, for example:'
          r,←⊂' ]GoToGitHub <owner>/<repo>/issues/1'
-         r,←⊂' ]GoToGitHub <owner> <repo>/issues/1'
+         r,←⊂' ]GoToGitHub <owner> <repo>/issues/1   ⍝ Same'
      :Case ⎕C'Version'
          ∘∘∘
      :EndSelect

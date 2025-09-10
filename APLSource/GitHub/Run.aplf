@@ -57,21 +57,26 @@
      :ElseIf 0=≢parms.repo
          parms.repo←parms.owner
          parms.owner←''
+         :If 0=≢parms.repo
+         :AndIf 9=⎕SE.⎕NC'Cider'
+             list←{⍵[;1]}⎕SE.Cider.ListOpenProjects 0
+             :If 1=≢list
+                 parms.(owner repo)←¯2↑'/'(≠⊆⊢)(⍎⊃list).CiderConfig.CIDER.project_url
+             :ElseIf 1<≢list
+                 parms.owner←⊃¯2↑'/'(≠⊆⊢)(⍎1⊃list).CiderConfig.CIDER.project_url
+                 list←{⊃¯1↑'.'(≠⊆⊢)⍵}¨list
+                 list,←⊂parms.owner,'''s home page on GitHub'
+                 ind←'SelGo2GitHub_2@Select repository to go to on GitHub:'CommTools.Select list
+                 :If 0=≢ind
+                     →0 ⋄ r←'Cancelled by user'
+                 :ElseIf ind<≢list
+                     parms.repo←ind⊃list
+                 :EndIf
+             :EndIf
+         :EndIf
      :EndIf
      :If 0=≢parms.owner
          parms.owner←GetDefaultOwner
-     :EndIf
-     :If 0=≢parms.repo
-     :AndIf 9=⎕SE.⎕NC'Cider'
-     :AndIf 0<≢list←{⍵[;1]}⎕SE.Cider.ListOpenProjects 0
-         list←{⊃¯1↑'.'(≠⊆⊢)⍵}¨list
-         list,←⊂parms.owner,'''s home page on GitHub'
-         ind←'SelGo2GitHub@Select repository to go to on GitHub:'CommTools.Select list
-         :If 0=≢ind
-             →0 ⋄ r←'Cancelled by user'
-         :ElseIf ind<≢list
-             parms.repo←ind⊃list
-         :EndIf
      :EndIf
      :If parms.permanent
          'You must specify an owner with -permanent'Assert 0<≢parms.owner

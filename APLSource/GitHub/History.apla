@@ -1,4 +1,6 @@
 (
+ '* 0.16.0 ⋄ 2025-09-10'
+ '  * Syntax of ]GoToGitHub has changed'
  '* 0.15.0 ⋄ 2025-04-23'
  '  * `ListRepos` now honours a flag `issues`'
  '  * `ListRepos` now allows to specify the desired sort order with -sort=[name | issues]'
