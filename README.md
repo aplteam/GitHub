@@ -110,7 +110,13 @@ However, authentication is easy: you need an access token. Once you have that, y
 
 #### Config file 
 
-In your home directory, there is a folder `.config` which hosts, possibly among other stuff, a folder `github`, and in that folder, there is a file `github-config.json5`. Add this:
+In your home directory, there is a folder `.config` which hosts, most likely among other stuff, a folder 
+
+```
+dyalog/aplteam/github
+```
+
+and in that folder, there is a file `github-config.json5`. Add this:
 
 ```
 {
@@ -128,5 +134,6 @@ Of course this might not be safe to do, depending on your circumstances,
 You can set a variable named `GITHUB_ACCESS_TOKEN` to hold your access token, and it will be picked up. 
 
 This is considered to be a safer option.
+
 
 
