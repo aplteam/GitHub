@@ -1,0 +1,15 @@
+ R←Test_ReportAllIssues_001(stopFlag batchFlag);⎕TRAP;stop;rc;msg;filename
+⍝ Exercise ]GitHub.ReportAllIssues with just the owner
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg filename)←stop UCMD'ReportAllIssues aplteam'
+ →T.GoToTidyUp rc≠0
+ →T.GoToTidyUp~⎕NEXISTS filename
+
+ R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.RmDirByForce filename
+⍝Done
