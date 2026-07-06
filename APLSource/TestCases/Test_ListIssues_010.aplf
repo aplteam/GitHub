@@ -1,0 +1,31 @@
+ R←Test_ListIssues_010(stopFlag batchFlag);⎕TRAP;rc;msg;stop;data1;data2;data3;data4;data5
+⍝ Exercise ]GitHub.ListIssues with -verbose and -assignees=
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg data1)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose'
+ →T.PassesIf rc=0
+
+ (rc msg data2)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=aplteam'
+ →T.PassesIf rc=0
+ →T.PassesIf∧/(⊂⊂'aplteam')∊¨{','(≠⊆⊢)⍵}¨2↓data2[;7]
+ →T.PassesIf>/≢¨data1 data2
+
+ (rc msg data3)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=max-spencer'
+ →T.PassesIf rc=0
+ →T.PassesIf∧/(⊂⊂'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data3[;7]
+ →T.PassesIf>/≢¨data1 data3
+
+ (rc msg data4)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=aplteam,max-spencer'
+ →T.PassesIf rc=0
+ →T.PassesIf∧/∨/¨(⊂'aplteam' 'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data4[;7]
+ →T.PassesIf>/≢¨data1 data4
+
+ (rc msg data5)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=max-spencer∨aplteam'
+ →T.PassesIf rc=0
+ →T.PassesIf∧/∨/¨(⊂'aplteam' 'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data5[;7]
+ →T.PassesIf>/≢¨data1 data5
+
+ R←T._OK
+⍝Done

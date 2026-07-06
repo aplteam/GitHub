@@ -1,0 +1,28 @@
+ R←Test_ListIssues_011(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename1;filename2;filename3;filename4;filename5;html2;html3;html4;html5
+⍝ Exercise ]GitHub.ListIssues with -html and -assignees=
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg filename2)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -html -assignees=aplteam'
+ →T.PassesIf rc=0
+ html2←⊃⎕NGET filename2 1
+ →T.PassesIf'aplteam,max-spencer' 'aplteam'≡{{⍵↑⍨¯1+⍵⍳'<'}{⍵↓⍨⍵⍳'>'}⍵}¨html2[(1+⍸(∨/¨'>Assignees<'∘⍷¨html2))]
+
+ (rc msg filename3)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -html -assignees=max-spencer'
+ →T.PassesIf rc=0
+ html3←⊃⎕NGET filename3 1
+ →T.PassesIf∨/¨'max-spencer'∘⍷¨{{⍵↑⍨¯1+⍵⍳'<'}{⍵↓⍨⍵⍳'>'}⍵}¨html3[(1+⍸(∨/¨'>Assignees<'∘⍷¨html3))]
+
+ (rc msg filename4)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -html -assignees=aplteam,max-spencer'
+ →T.PassesIf rc=0
+ html4←⊃⎕NGET filename4 1
+ →T.PassesIf'aplteam,max-spencer' 'aplteam'≡{{⍵↑⍨¯1+⍵⍳'<'}{⍵↓⍨⍵⍳'>'}⍵}¨html4[(1+⍸(∨/¨'>Assignees<'∘⍷¨html4))]
+
+ (rc msg filename5)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -html -assignees=max-spencer∨aplteam'
+ →T.PassesIf rc=0
+ html5←⊃⎕NGET filename5 1
+  →T.PassesIf'aplteam,max-spencer' 'aplteam'≡{{⍵↑⍨¯1+⍵⍳'<'}{⍵↓⍨⍵⍳'>'}⍵}¨html5[(1+⍸(∨/¨'>Assignees<'∘⍷¨html5))]
+
+ R←T._OK
+⍝Done
