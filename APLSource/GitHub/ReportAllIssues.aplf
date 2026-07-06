@@ -1,0 +1,53 @@
+ r←ReportAllIssues ns_;G;list;qdmx;md;row;i;parms;html;ns;repo;repos;noOf;buff;data
+ :Trap 11
+     G←⎕NEW GitHubAPIv3(,⊂ns_.owner)
+     G.personal_access_token←ns_.accessToken
+ :Else
+     0 Assert⍨'Owner <',ns_.owner,'> is unknown'
+ :EndTrap
+ parms←⎕NS''
+ parms.verbose←1
+ parms.issues←1
+ parms.sort←''
+ parms.forks←0
+ parms.owner←ns_.owner
+ parms.accessToken←G.personal_access_token
+ repos←(¯2↓2↓ListRepos parms)[;1 2]
+ data←''
+ ns←⎕NS''
+ ns.owner←ns_.owner
+ ns.accessToken←G.personal_access_token
+ ns.verbose←1
+ ns.html←0
+ ns.filename←''
+ ns.comments←0
+ ns.collapse←0
+ ns.assignees←ns_.assignees
+ :For repo noOf :In ↓repos[;1 2]
+     ns.repo←repo
+     :Trap 11
+         list←G.GetAllIssues ns.repo
+     :Else
+         qdmx←⎕DMX
+         qdmx.EM Assert 0
+     :EndTrap
+     :If 0<≢list
+         i←⎕NS''
+         i.(number title labels creator created_at comments assignees)←⍳7
+         buff←i ListIssues_CollectData_Verbose list
+         :If 0<≢ns.assignees
+             buff←(1 1,∨/¨(⊂{∨/'∨,'∊⍵:(~⍵∊',∨')⊆⍵ ⋄ ⊂⍵}ns.assignees)∊¨' '~⍨¨{','∊⍵:','(≠⊆⊢)⍵ ⋄ ⊂⍵}¨2↓buff[;i.assignees])⌿buff
+         :EndIf
+         data,←(⊂'*** ',repo,' ***'),⊂buff
+     :EndIf
+ :EndFor
+ :If 0<≢data
+     :If ns_.raw
+         r←⍪data
+     :Else
+         r←ReportAllIssues_CreateHTML data ns_ i
+     :EndIf
+ :Else
+     r←'No issues fouund'
+ :EndIf
+⍝Done

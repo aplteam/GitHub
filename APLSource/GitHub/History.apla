@@ -1,7 +1,10 @@
 (
- '* 0.17.0 ⋄ 2026-07-05'
+ '* 0.17.0 ⋄ 2026-07-06'
+ '  * User command ]ReportAllIssues added'
  '  * ]ListIssues has a new option: -assignees='
+ '  * README polished'
  '  * Packages updated'
+ '  * User command help (-??) transformed into variables (much easier to edit)'
  '  * Bug fixes'
  '    * ]ListIssues did not process assignee correctly'
  '* 0.16.0 ⋄ 2025-09-21'

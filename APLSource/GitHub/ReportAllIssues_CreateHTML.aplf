@@ -1,0 +1,26 @@
+ filename←ReportAllIssues_CreateHTML(data ns i);md;row;parms;html;ns2;item;ind;title;mat;colHeaders
+ md←''
+ md,←⊂'# Report for all issues over all repos for ',ns.owner
+ :If 0<≢ns.assignees
+     md,←''('Filtered by assignees = ',ns.assignees)
+ :EndIf
+ :For ind :In {⍵/⍨(≢⍵)⍴1 0}⍳≢data
+     (title mat)←data[ind+0 1]
+     colHeaders←mat[1;]
+     mat←2↓mat
+     :If 2<≢mat
+         md,←⊂''
+         md,←⊂'## ',(4↓¯4↓title),' (',(⍕≢mat),')'
+         md,←⊂''
+         md,←colHeaders MarkAPL.Matrix2MarkdownTable mat
+     :EndIf
+ :EndFor
+ parms←MarkAPL.CreateParms
+ parms.outputFilename←ns.filename
+ parms.toc←2 2
+ parms.cssURL←MarkAPL.##.TatinVars.GetFullPath2AssetsFolder
+ parms.title←'All issues for ',ns.owner
+ parms.verbose←0
+ (html ns2)←parms MarkAPL.Markdown2HTML md
+ filename←ns.filename
+⍝Done

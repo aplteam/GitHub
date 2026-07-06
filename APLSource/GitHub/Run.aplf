@@ -47,7 +47,6 @@
      :AndIf ~parms.html
          parms.verbose←1
      :EndIf
-     parms.allRepos←''Args.Switch'allRepos'
      r←ListIssues parms
      :If parms.permanent
          SaveDefaultOwner parms.owner
@@ -90,6 +89,20 @@
      :If parms.permanent
          SaveDefaultOwner parms.owner
      :EndIf
+ :Case ⎕C'ReportAllIssues'
+     parms←⎕NS''
+     parms.owner←''Args.Switch'_1'
+     :If 0=≢parms.owner
+         parms.owner←GetDefaultOwner
+     :EndIf
+     parms.assignees←''Args.Switch'assignees'
+     parms.accessToken←GetAccessToken
+     parms.filename←''Args.Switch'filename'
+     :If 0=≢parms.filename
+         parms.filename←'.html'FilesAndDirs.GetTempFilename2'ReportIssues'
+     :EndIf
+     parms.raw←0Args.Switch'raw'
+     r←ReportAllIssues parms
  :Case ⎕C'Version'
      r←↑('GitHub'Version)('GitHubAPIv3'GitHubAPIv3.Version)
  :Else

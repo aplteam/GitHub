@@ -22,14 +22,20 @@
      
       c←⎕NS ⍬
       c.(Group Name)←'GitHub' 'ListIssues'
-      c.Parse←'1-2 -verbose -html -filename= -collapse -permanent -assignees= -allRepos'
+      c.Parse←'1-2 -verbose -html -filename= -collapse -permanent -assignees='
       c.Desc←'Returns a list of open issues for the given owner/project'
       r,←c
-      
-      c←⎕ns''
+     
+      c←⎕NS''
       c.(Group Name)←'GitHub' 'GoToGitHub'
       c.Parse←'2s -permanent'
       c.Desc←'Opens the homepage of the given repository on GitHub'
+      r,←c
+     
+      c←⎕NS ⍬
+      c.(Group Name)←'GitHub' 'ReportAllIssues'
+      c.Parse←'1s -assignees= -raw'
+      c.Desc←'Reports all issues for all repos for a given owner'
       r,←c
      
       c←⎕NS ⍬

@@ -1,0 +1,10 @@
+(
+ 'Report all issues over all repos of a given owner.'
+ 'By default an HTML report is compiled and the filename returned but check -raw.'
+ ''
+ '-assignees=  Use this to filter the issues accordingly'
+ '-raw         If you don''t want an HTML report but the raw data use this flag'
+ '-filename=   By default a temp file is generated. You may specify a specific filename'
+ '             instead. If the file already exists it is overwritten.'
+ '             Is ignored when -raw is specified.'
+)

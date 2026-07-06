@@ -3,3 +3,4 @@
  r,←⊂'ListIssues'
  r,←⊂'ListRepos'
  r,←⊂'GoToGitHub'
+ r,←⊂'ReportAllIssues'
