@@ -1,5 +1,5 @@
  R←Test_ListIssues_006(stopFlag batchFlag);⎕TRAP;rc;msg;stop;cfgFilename;data;json
-⍝ Exercise ]GitHub.ListRepos with the -permanent flag
+⍝ Exercise ]GitHub.ListIssues with the -permanent flag
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
