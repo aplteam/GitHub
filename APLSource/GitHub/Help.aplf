@@ -1,4 +1,4 @@
- r←level Help cmd
+ r←level Help cmd;ref
  r←''
  :Select ⊃level
  :Case 0
@@ -13,60 +13,11 @@
          r,←'Returns the version numbers of both ]GitHub and the package GitHubAPIv3.'
      :EndSelect
  :Case 1
-     :Select ⎕C cmd
-     :Case ⎕C'ListRepos'
-         r,←⊂']ListRepos [owner] -verbose -permanent -issues  -sort=[name|issues] -forks'
-         r,←⊂''
-         r,←⊂'Lists all repositories owned by the given owner or, if no argument is passed, the default'
-         r,←⊂'owner specified in the configuration file. No forks are listed but see -forks flag.'
-         r,←⊂''
-         r,←⊂'Returns just the names of the repos, but check -verbose.'
-         r,←⊂'By default the list is ordered by repo name, but when -issues is specified the default sort'
-         r,←⊂'order is by the tally of issue. You can specify a particular sort order with -sort=, see there.'
-         r,←⊂''
-         r,←⊂'-verbose    Returns more data: name, number of open issues and description.'
-         r,←⊂'-issues     If specified, only repos are listed that have open issues.'
-         r,←⊂'-sort=      You can enforce a particular sort oder by assigning "name" or "issues" to -sort'
-         r,←⊂'            Is ignored when -html is specified.'
-         r,←⊂'-forks      By default no forks are listed. By specifying this you can list just forks instead.'
-         r,←⊂'-permanent  Saves the given owner in the configuration file. If no owner is specified and'
-         r,←⊂'            this flag is specified then an error is thrown.'
-     :Case ⎕C'ListIssues'
-         r,←⊂']ListIssues [owner] <project> -html -collapse -verbose -filename= -permanent'
-         r,←⊂''
-         r,←⊂'Alternatively you can specify owner & repo this way: ]GitHub.ListIssues aplteam/TestRepo'
-         r,←⊂''
-         r,←⊂'Lists all open issues of the given project with "issue number" and "title", but check'
-         r,←⊂'-verbose and -html'
-         r,←⊂''
-         r,←⊂'-html       Adds date, body & url and creates an HTML page.'
-         r,←⊂'            That allows to search all issues in one go.'
-         r,←⊂'-filename=  Filename for the HTML created when the -html flag is specified.'
-         r,←⊂'            If this is not specified, a temporary filename is used.'
-         r,←⊂'-collapse   Makes both the "details" and the "body" of each issue collapsible.'
-         r,←⊂'            Is ignored if -html is not specified.'
-         r,←⊂'-verbose    Adds more data: labels, creator, create date, assignees and number of comments.'
-         r,←⊂'            Is ignored when -html is specified.'
-         r,←⊂'-permanent  Saves the given owner in the configuration file. If no owner is specified and'
-         r,←⊂'            this flag is specified an error is thrown.'
-     :Case ⎕C'GoToGitHub'
-         r,←⊂'Opens the homepage of the given repository on GitHub'
-         r,←⊂''
-         r,←⊂'Notes:'
-         r,←⊂' * You can also specify owner & repo as a single vector: ]GitHub.GoToGitHub aplteam/TestRepo'
-         r,←⊂' * You can put the owner''s home page on display with ]GitHub.GoToGitHub aplteam/'
-         r,←⊂''
-         r,←⊂'If the user does not specify a repository, the user command checks whethere there are any'
-         r,←⊂'currently opened Cider projects. If there is just one, it acts on it. If there are multiple'
-         r,←⊂'open Cider projects, the user is asked which one she wants to act on. If there is no open'
-         r,←⊂'Cider project, it will go to the owner''s home page on GitHub.'
-         r,←⊂''
-         r,←⊂'You may add additional levels, for example:'
-         r,←⊂' ]GoToGitHub <owner>/<repo>/issues/1'
-         r,←⊂' ]GoToGitHub <owner> <repo>/issues/1   ⍝ Same'
-     :Case ⎕C'Version'
-         ∘∘∘
-     :EndSelect
+     :If ≡/⎕C¨cmd'Version'
+         r,←'Returns the version numbers of both ]GitHub and the package GitHubAPIv3.'
+     :Else
+         r←help⍎cmd
+     :EndIf
  :Case 2
      ⍝ Nope
  :EndSelect
