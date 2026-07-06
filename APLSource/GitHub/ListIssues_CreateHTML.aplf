@@ -14,9 +14,9 @@
      md,←⊂(ns.collapse/'=> '),'| Last update at | ',i.updated_at⊃row
      md,←⊂(ns.collapse/'=> '),'| Labels | ',i.labels⊃row
      md,←⊂(ns.collapse/'=> '),'| No. of comments | ',⍕i.comments⊃row
-     md,←⊂(ns.collapse/'=> '),'| Assignees | ',i.assignee⊃row
+     md,←⊂(ns.collapse/'=> '),'| Assignees | ',i.assignees⊃row
      md,←⊂ns.collapse/'=> '
-     :If 0<≢body←i.body⊃row
+     :If 0<≢∊body←i.body⊃row
          md,←⊂(ns.collapse/'!> '),'### Reasoning'
          md,←(⊂ns.collapse/'=> '),¨MassageBody body
      :Else

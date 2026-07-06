@@ -27,7 +27,7 @@
          i.(number title labels creator body created_at comments assignees updated_at html_url)←⍳10
          r←i ListIssues_CollectData_HTML list
          :If 0<≢ns.assignees
-             r←(ns.assignees∘≡¨r[;i.assignees])⌿r
+             r←(∨/¨(⊂{∨/'∨,'∊⍵:(~⍵∊',∨')⊆⍵ ⋄ ⊂⍵}ns.assignees)∊¨' '~⍨¨{','∊⍵:','(≠⊆⊢)⍵ ⋄ ⊂⍵}¨r[;i.assignees])⌿r
          :EndIf
          :If 0=≢ns.filename
              ns.filename←'.html'FilesAndDirs.GetTempFilename2'IssueList'

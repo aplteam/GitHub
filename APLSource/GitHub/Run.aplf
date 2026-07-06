@@ -43,6 +43,11 @@
      parms.filename←''Args.Switch'filename'
      parms.comments←0 Args.Switch'comments'
      parms.collapse←Args.Switch'collapse'
+     :If 0<≢parms.assignees←''Args.Switch'assignees'
+     :AndIf ~parms.html
+         parms.verbose←1
+     :EndIf
+     parms.allRepos←''Args.Switch'allRepos'
      r←ListIssues parms
      :If parms.permanent
          SaveDefaultOwner parms.owner
