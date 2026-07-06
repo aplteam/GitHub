@@ -83,12 +83,12 @@ Get a detailed list with all issues for the project "aplteam/tatin":
 
 ```
       ]GitHub.ListIssues aplteam tatin -verbose
- No.  Title                      Label(s)    Creator   Created at  ≢⍝  Assignee
- ---  -----                      --------    -------   ----------  --  --------
+ No.  Title                      Label(s)    Creator   Created at  ≢⍝  Assignees
+ ---  -----                      --------    -------   ----------  --  ---------
  198  Tatin user command ...                 dyavc     2024-07-30   2
  196  ListPackages: Add  ...  enhancement    aplteam   2024-07-03
  192  Consider switching ...  enhancement    aplteam   2024-06-05   1
- 190  ]UpdateTatin should ... enhancement    aplteam   2024-03-26   1
+ 190  ]UpdateTatin should ... enhancement    aplteam   2024-03-26   1  doe,smith
  ...
   70  Add sorting to the ...  enhancement     aplteam   2021-11-01
 ```
@@ -134,6 +134,7 @@ Of course this might not be safe to do, depending on your circumstances,
 You can set a variable named `GITHUB_ACCESS_TOKEN` to hold your access token, and it will be picked up. 
 
 This is considered to be a safer option.
+
 
 
 
