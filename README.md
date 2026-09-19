@@ -12,7 +12,7 @@ give you a **better overview than GitHub itself does**.
 
 Which of my 68 repositories actually need attention? Which issues are assigned to me, across
 everything I maintain? On GitHub that is a lot of clicking. Here it is one line, and the answer
-comes back as an APL matrix you can sort, filter and compute with — or as a single searchable
+comes back as an APL matrix you can sort, filter and compute with, or as a single searchable
 HTML report.
 
 ```
@@ -42,13 +42,13 @@ Then check that it arrived:
 
 ## The commands
 
-| Command | What it does |
-|---------|--------------|
-| `]GitHub.ListRepos` | Lists the repositories of an owner, optionally with issue counts and descriptions |
-| `]GitHub.ListIssues` | Lists the open issues of one repository, as a table or as a full HTML page |
-| `]GitHub.ReportAllIssues` | One HTML report covering every repository of an owner |
-| `]GitHub.GoToGitHub` | Opens a repository — or anything below it — in your browser |
-| `]GitHub.CreateRelease` | Prints the `gh` command that would create a release, with version, notes and assets taken from the project |
+|Command                  |What it does                                                                                              |
+|-------------------------|----------------------------------------------------------------------------------------------------------|
+|`]GitHub.ListRepos`      |Lists the repositories of an owner, optionally with issue counts and descriptions                         |
+|`]GitHub.ListIssues`     |Lists the open issues of one repository, as a table or as a full HTML page                                |
+|`]GitHub.ReportAllIssues`|One HTML report covering every repository of an owner                                                     |
+|`]GitHub.GoToGitHub`     |Opens a repository (or anything below it) in your browser                                                 |
+|`]GitHub.CreateRelease`  |Prints the `gh` command that would create a release, with version, notes and assets taken from the project|
 
 Each takes `-?` for a summary and `-??` for the full syntax, and each is also available as a
 function; see [API](#api).
@@ -87,7 +87,7 @@ All repositories of an owner:
 ```
 
 "OI" stands for "open issues". Add `-issues` to drop the quiet repositories, and `-sort=` to
-choose the order (`name` or `issues`) — with `-issues` the issue count is already the default
+choose the order (`name` or `issues`); with `-issues` the issue count is already the default
 order. Forks are left out unless you ask for them with `-forks`.
 
 ### Issues
@@ -145,7 +145,7 @@ owner into one HTML report:
 ```
 
 The filename is returned; by default it is a temporary file, and `-filename=` chooses your own.
-`-raw` hands you the data instead of a report, and `-assignees=` filters exactly as above — which
+`-raw` hands you the data instead of a report, and `-assignees=` filters exactly as above, which
 makes `]GitHub.ReportAllIssues aplteam -assignees=me` a fair answer to "what is on my plate?".
 
 ### Jump to GitHub
@@ -187,11 +187,11 @@ Everything in it was read from the project rather than remembered:
 | Part of the release | Comes from |
 |---------------------|------------|
 | owner and repository | the `project_url` of the Cider config |
-| `version` and `tag` | `apl-package.json` — build metadata (`+64`) dropped, and the tag gets the `v` the other tags carry |
+| `version` and `tag` | `apl-package.json`; build metadata (`+64`) dropped, and the tag gets the `v` the other tags carry |
 | `releaseTitle` | `Version 1.2.3`, from that same version |
 | pre-release | the version itself: `0.19.0-beta-1` adds `--prerelease`, and takes its notes from `0.19.0` |
 | release notes | the entry for that very version in `History` |
-| assets | every file in the distribution folder, named relative to the project — you are asked which of them to attach |
+| assets | every file in the distribution folder, named relative to the project; you are asked which of them to attach |
 
 Whatever could **not** be collected is reported above the command, so you find out before
 you run it rather than afterwards:
@@ -213,8 +213,7 @@ To be consumed as a Tatin package, see https://tatin.dev
 ```
 
 This is what `tatinPackage` in the collected namespace decides, and it defaults to "the
-project has an `apl-package.json`". For anything that is *not* a package — Tatin itself,
-or Meddy — set it to `0` and you are asked which files of the distribution folder to attach:
+project has an `apl-package.json`". For anything that is *not* a package — like Tatin — set it to `0` and you are asked which files of the distribution folder to attach:
 
 ```apl
       parms←⎕SE.GitHub.CreateReleaseParms
@@ -222,25 +221,19 @@ or Meddy — set it to `0` and you are asked which files of the distribution fol
       ⎕SE.GitHub.PrintReleaseCommand parms ⎕SE.GitHub.CreateRelease ⍬
 ```
 
-Since `Make` empties the distribution folder before it builds, everything in there belongs
-to the build you are releasing.
+Naturally everything in the distribution folder should belong to the build you are releasing.
 
 ### Draft first, fine-tune second
 
 The command carries `--draft`, so running it creates the release **without publishing it**:
 nothing is announced, nobody is notified, and it is visible only to you. The draft then sits
 on GitHub where the web page is far better than any command line at the things that want
-judgement — rewriting the title, editing the notes, adding or dropping assets.
+judgement: rewriting the title, editing the notes, adding or dropping assets.
 
-That split is the point. The machine supplies what it can get right by looking — which is
-precisely the part that is easiest to get wrong by hand — and you supply the wording.
+That split is the point. The machine supplies what it can get right by looking (which is
+precisely the part that is easiest to get wrong by hand) and you supply the wording.
 
-When it reads the way you want it, press publish on the page — or, without leaving the
-session:
-
-```
-gh release edit v0.19.0 --draft=false
-```
+When it reads the way you want it, press publish on the page.
 
 If you would rather see what was collected than the command built from it, `-raw` hands
 you the namespace instead:
@@ -251,7 +244,7 @@ you the namespace instead:
 
 ## Access tokens
 
-All these commands do is read public data, so you need not worry about authentication — right?
+All these commands do is read public data, so you need not worry about authentication, right?
 Unfortunately not. Unauthenticated, you get only a limited number of requests per day, and if you
 use these commands often you will run out.
 
@@ -264,7 +257,7 @@ option, and it is the one checked first.
 
 ### Config file
 
-In your home directory there is a folder `.config`, hosting — most likely among other stuff — a
+In your home directory there is a folder `.config`, hosting (most likely among other stuff) a
 folder `dyalog/aplteam/github`. In it lives `github-config.json5`:
 
 ```json5
@@ -292,7 +285,7 @@ namespace:
 | `ReportAllIssues` | `owner`, `accessToken`, `assignees`, `filename`, `raw` |
 | `GoToGitHub` | `(owner repo)` |
 | `CreateRelease` | a Cider project ref, or `⍬` to work it out |
-| `CreateReleaseParms` | nothing — it returns the defaults |
+| `CreateReleaseParms` | nothing: it returns the defaults |
 | `PrintReleaseCommand` | what `CreateRelease` returned |
 
 The variables mean what the flags and modifiers of the corresponding user command mean. All of
@@ -328,3 +321,4 @@ Dyalog APL 18.2 or later, on Windows, Linux or macOS.
 ## License
 
 [MIT](LICENSE) — Kai Jaeger
+
