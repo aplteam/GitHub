@@ -70,10 +70,10 @@
                  parms.owner←⊃¯2↑'/'(≠⊆⊢)(⍎1⊃list).CiderConfig.CIDER.project_url
                  list←{⊃¯1↑'.'(≠⊆⊢)⍵}¨list
                  list,←⊂parms.owner,'''s home page on GitHub'
-                 ind←'SelGo2GitHub_2@Select repository to go to on GitHub:'CommTools.Select list
-                 :If 0=≢ind
-                     →0 ⋄ r←'Cancelled by user'
-                 :ElseIf ind<≢list
+                 ind←'SelGo2GitHub_2@Select repository to go to on GitHub:' 0 1 1 CommTools.Select list
+                 :If ¯1≡ind
+                     r←'Cancelled by user' ⋄ →0
+                 :Else
                      parms.repo←ind⊃list
                  :EndIf
              :EndIf
@@ -101,7 +101,7 @@
      :If 0=≢parms.filename
          parms.filename←'.html'FilesAndDirs.GetTempFilename2'ReportIssues'
      :EndIf
-     parms.raw←0Args.Switch'raw'
+     parms.raw←0 Args.Switch'raw'
      r←ReportAllIssues parms
  :Case ⎕C'Version'
      r←↑('GitHub'Version)('GitHubAPIv3'GitHubAPIv3.Version)
