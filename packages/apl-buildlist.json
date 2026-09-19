@@ -3,10 +3,11 @@
     "aplteam-MarkAPL-15.0.0",
     "aplteam-GitHubAPIv3-2.1.1",
     "aplteam-FilesAndDirs-7.1.1",
-    "aplteam-CommTools-2.0.2",
+    "aplteam-CommTools-3.2.0",
     "aplteam-APLTreeUtils2-1.4.1",
     "dyalog-HttpCommand-5.11.1",
     "aplteam-OS-4.0.0",
+    "aplteam-CommTools-2.0.2",
   ],
   principal: [
     1,
@@ -16,8 +17,10 @@
     1,
     0,
     0,
+    0,
   ],
   url: [
+    "https://tatin.dev/",
     "https://tatin.dev/",
     "https://tatin.dev/",
     "https://tatin.dev/",
