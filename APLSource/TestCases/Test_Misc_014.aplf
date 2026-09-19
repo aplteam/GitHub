@@ -1,0 +1,33 @@
+ R←Test_Misc_014(stopFlag batchFlag);⎕TRAP;S
+⍝ Exercise `SplitProjectUrl`: a project URL need not have the expected shape.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ S←##.GitHub.SplitProjectUrl
+
+ ⍝ The ordinary case, and the variations that are still fine:
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://github.com/aplteam/GitHub'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://github.com/aplteam/GitHub/'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'http://github.com/aplteam/GitHub'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'github.com/aplteam/GitHub'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://www.github.com/aplteam/GitHub'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://GitHub.COM/aplteam/GitHub'
+
+ ⍝ A trailing ".git" does not belong to the repository's name:
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://github.com/aplteam/GitHub.git'
+
+ ⍝ Anything below the repository is none of our business:
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://github.com/aplteam/GitHub/blob/main/README.md'
+ →T.PassesIf('aplteam' 'GitHub' '')≡S'https://github.com/aplteam/GitHub/issues/1'
+
+ ⍝ And what must be refused rather than taken apart regardless:
+ →T.PassesIf 0<≢3⊃S'https://gitlab.com/someone/Thing'
+ →T.PassesIf 0<≢3⊃S'https://github.com/aplteam'      ⍝ No repository at all
+ →T.PassesIf 0<≢3⊃S''
+ →T.PassesIf 0<≢3⊃S'https://'
+ ⍝ …and in every one of those, owner and repo must be empty rather than wrong:
+ →T.PassesIf∧/0=≢¨2↑S'https://gitlab.com/someone/Thing'
+ →T.PassesIf∧/0=≢¨2↑S'https://github.com/aplteam'
+
+ R←T._OK
+⍝Done

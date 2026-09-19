@@ -11,6 +11,8 @@
          r,←'Opens the homepage of the given repository on GitHub'
      :Case ⎕C'ReportAllIssues'
          r,←'Reports all issues over all repos of the given owner.'
+     :Case ⎕C'CreateRelease'
+         r,←'Prints the "gh" command that would create a release for the current project.'
      :Case ⎕C'Version'
          r,←'Returns the version numbers of both ]GitHub and the package GitHubAPIv3.'
      :EndSelect

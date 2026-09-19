@@ -39,6 +39,12 @@
       r,←c
      
       c←⎕NS ⍬
+      c.(Group Name)←'GitHub' 'CreateRelease'
+      c.Parse←'-raw'
+      c.Desc←'Prints the "gh" command that would create a release for the current project'
+      r,←c
+     
+      c←⎕NS ⍬
       c.(Group Name Parse)←'GitHub' 'Version' ''
       c.Desc←'Returns the version number for both ]GitHub and ]GitHubAPIv3'
       r,←c

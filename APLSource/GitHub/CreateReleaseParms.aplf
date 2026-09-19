@@ -1,0 +1,26 @@
+ r←CreateReleaseParms
+⍝ Returns a namespace with every variable a GitHub release is made of, carrying defaults.\\
+⍝ `CreateRelease` starts from this and fills in whatever it can collect. You may also
+⍝ amend it yourself and pass it to `CreateRelease` as its left argument: what you set
+⍝ then takes precedence over what would have been collected.\\
+⍝ Note that a release is not a package. Nothing here describes the package, only this
+⍝ one release, which is why there is no "description": what GitHub puts on display as
+⍝ the text of a release is `body`, and that is where the release notes go.\\
+⍝ The variables are taken as they are, so if you override `version` you are expected to
+⍝ override `tag` and `releaseTitle` as well: they are not derived from it a second time.
+ r←⎕NS''
+ r.owner←''             ⍝ The owner of the repository on GitHub
+ r.repo←''              ⍝ The name of the repository
+ r.version←''           ⍝ Without any build metadata: "0.19.0", not "0.19.0+64"
+ r.tag←''               ⍝ What the release points at; "gh" creates the tag if need be
+ r.releaseTitle←''      ⍝ Defaulted by `CreateRelease` to "Version 1.2.3"
+ r.body←⍬               ⍝ The release notes: a vector of text vectors
+ r.assets←⍬             ⍝ Files to attach, relative to `projectHome` unless absolute;
+                        ⍝ `CreateRelease` offers every file of the distribution folder
+ r.tatinPackage←0       ⍝ 1 = consumed from tatin.dev, so no assets and a line saying so
+ r.draft←1              ⍝ 1 = created but not published, so nothing goes public by accident
+ r.prerelease←0         ⍝ 1 = GitHub marks it as a pre-release
+ r.target←''            ⍝ Branch or commit; empty means the repository's default branch
+ r.projectHome←''       ⍝ Where the project lives on disk
+ r.missing←⍬            ⍝ What could not be collected; `CreateRelease` fills this
+⍝Done

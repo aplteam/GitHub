@@ -1,0 +1,50 @@
+ {r}←PrintReleaseCommand parms;notes;cmd;item;buff
+⍝ Takes what `CreateRelease` collected and prints the `gh` command that would create
+⍝ the release on GitHub.\\
+⍝ **Nothing is executed and nothing is sent to GitHub**: the command is printed for you
+⍝ to check and then run yourself.\\
+⍝ The release notes are written to a temporary file which the command refers to, because
+⍝ passing several lines of Markdown on a command line is asking for trouble.\\
+⍝ Assets are taken relative to `projectHome`, unless they are absolute already.\\
+⍝ Note that `gh` creates the tag if it does not exist yet.\\
+⍝ Returns the command as a shy result, so that it can be captured.
+ 'Right argument must be a namespace'Assert 9=⎕NC'parms'
+⍝ What could not be collected is reported first: when something essential is among it
+⍝ the checks below signal, and then this report is the only explanation you get.
+ :If 0<≢parms.missing
+     ⎕←'*** Not collected:'
+     :For item :In parms.missing
+         ⎕←'      ',item
+     :EndFor
+     ⎕←''
+ :EndIf
+ 'There is no owner'Assert 0<≢parms.owner
+ 'There is no repository'Assert 0<≢parms.repo
+ 'There is no tag'Assert 0<≢parms.tag
+ cmd←'gh release create "',parms.tag,'"'
+ cmd,←' --repo "',parms.owner,'/',parms.repo,'"'
+ :If 0<≢parms.releaseTitle
+     cmd,←' --title "',parms.releaseTitle,'"'
+ :EndIf
+ :If 0<≢parms.body
+     notes←'.md'FilesAndDirs.GetTempFilename2'ReleaseNotes'
+     (⊂parms.body)⎕NPUT notes 1
+     cmd,←' --notes-file "',notes,'"'
+ :EndIf
+ :If parms.draft
+     cmd,←' --draft'
+ :EndIf
+ :If parms.prerelease
+     cmd,←' --prerelease'
+ :EndIf
+ :If 0<≢parms.target
+     cmd,←' --target "',parms.target,'"'
+ :EndIf
+ :If 0<≢parms.assets
+     ⍝ "gh" may well be run from anywhere, so it gets fully qualified names
+     buff←(⊂parms.projectHome){(':'∊2↑⍵)∨'/'=⊃⍵:⍵ ⋄ ⍺,'/',⍵}¨parms.assets
+     cmd,←⊃,/(⊂' "'),¨buff,¨⊂'"'
+ :EndIf
+ ⎕←cmd
+ r←cmd
+⍝Done

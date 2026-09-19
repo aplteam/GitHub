@@ -1,0 +1,66 @@
+ R←Test_Misc_015(stopFlag batchFlag);⎕TRAP;proj;template;collected;titled;ns;overruled;flag
+⍝ Exercise `CreateReleaseParms` and the optional left argument of `CreateRelease`.
+⍝ A stub project is passed, so the test does not depend on open Cider projects.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ proj←⎕NS''
+ proj.CiderConfig←⎕NS''
+ proj.CiderConfig.HOME←##.CiderConfig.HOME
+ proj.CiderConfig.CIDER←⎕NS''
+ proj.CiderConfig.CIDER.project_url←'https://github.com/aplteam/GitHub'
+ proj.CiderConfig.CIDER.distributionFolder←'Dist'
+
+ ⍝ A release is not a package, so neither of these has any business being here:
+ template←##.GitHub.CreateReleaseParms
+ →T.PassesIf~(⊂'description')∊template.⎕NL ¯2
+ →T.PassesIf~(⊂'license')∊template.⎕NL ¯2
+ →T.PassesIf 1=template.draft                  ⍝ Nothing goes public by accident
+
+ ⍝ What is collected must have exactly the shape the template describes:
+ collected←##.GitHub.CreateRelease proj
+ →T.PassesIf(template.⎕NL ¯2)≡collected.⎕NL ¯2
+
+ ⍝ A simple text vector as ⍺ is the title, and nothing else changes:
+ titled←'Long awaited spring release'##.GitHub.CreateRelease proj
+ →T.PassesIf'Long awaited spring release'≡titled.releaseTitle
+ →T.PassesIf titled.version≡collected.version
+ →T.PassesIf titled.tag≡collected.tag
+
+ ⍝ A namespace as ⍺ beats what was collected, but only where it says something:
+ ns←⎕NS''
+ ns.releaseTitle←'Hand-written title'
+ ns.draft←0
+ overruled←ns ##.GitHub.CreateRelease proj
+ →T.PassesIf'Hand-written title'≡overruled.releaseTitle
+ →T.PassesIf 0=overruled.draft
+ →T.PassesIf overruled.version≡collected.version   ⍝ Untouched, so still collected
+ →T.PassesIf overruled.assets≡collected.assets
+
+ ⍝ An empty namespace is fine: it insists on nothing, so nothing changes.
+ overruled←(⎕NS'')##.GitHub.CreateRelease proj
+ →T.PassesIf overruled.releaseTitle≡collected.releaseTitle
+ →T.PassesIf overruled.draft≡collected.draft
+
+ ⍝ A name that is not a release parameter must be refused rather than ignored:
+ flag←0
+ ns←⎕NS''
+ ns.nonsense←42
+ :Trap 0
+     {}ns ##.GitHub.CreateRelease proj
+ :Else
+     flag←∨/'nonsense'⍷⎕DMX.EM
+ :EndTrap
+ →T.PassesIf flag
+
+ ⍝ …and so must a left argument that is neither text nor a namespace:
+ flag←0
+ :Trap 0
+     {}(1 2 3)##.GitHub.CreateRelease proj
+ :Else
+     flag←1
+ :EndTrap
+ →T.PassesIf flag
+
+ R←T._OK
+⍝Done

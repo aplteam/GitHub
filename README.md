@@ -48,6 +48,7 @@ Then check that it arrived:
 | `]GitHub.ListIssues` | Lists the open issues of one repository, as a table or as a full HTML page |
 | `]GitHub.ReportAllIssues` | One HTML report covering every repository of an owner |
 | `]GitHub.GoToGitHub` | Opens a repository — or anything below it — in your browser |
+| `]GitHub.CreateRelease` | Prints the `gh` command that would create a release, with version, notes and assets taken from the project |
 
 Each takes `-?` for a summary and `-??` for the full syntax, and each is also available as a
 function; see [API](#api).
@@ -162,6 +163,92 @@ on that, with several it asks which one you mean.
 > On Windows the page opens in your default browser. Elsewhere the command prints `]Open <url>`
 > for you to execute.
 
+## Creating a release
+
+Cutting a release means getting a handful of fiddly things exactly right, and the version
+number is the one that goes wrong most often: typed from memory, a digit out, or still
+carrying a beta suffix that should have gone. `]GitHub.CreateRelease` takes them from the
+project instead of from your memory of it.
+
+```apl
+      ]GitHub.CreateRelease
+```
+
+It prints the `gh` command that would create the release. **It does not run it**, and
+nothing is sent to GitHub:
+
+```
+gh release create "v0.19.0" --repo "aplteam/GitHub" --title "Version 0.19.0"
+   --notes-file "…/ReleaseNotes_1.md" --draft
+```
+
+Everything in it was read from the project rather than remembered:
+
+| Part of the release | Comes from |
+|---------------------|------------|
+| owner and repository | the `project_url` of the Cider config |
+| `version` and `tag` | `apl-package.json` — build metadata (`+64`) dropped, and the tag gets the `v` the other tags carry |
+| `releaseTitle` | `Version 1.2.3`, from that same version |
+| pre-release | the version itself: `0.19.0-beta-1` adds `--prerelease`, and takes its notes from `0.19.0` |
+| release notes | the entry for that very version in `History` |
+| assets | every file in the distribution folder, named relative to the project — you are asked which of them to attach |
+
+Whatever could **not** be collected is reported above the command, so you find out before
+you run it rather than afterwards:
+
+```
+*** Not collected:
+      release notes (no entry for 0.19.0-beta-1 or 0.19.0 in History)
+```
+
+### Tatin packages carry no assets
+
+A Tatin package is not consumed from GitHub: its ZIP is published on <https://tatin.dev>.
+Attaching that same ZIP to a GitHub release would offer a second, competing source for it,
+so nothing is attached, and a line is added to the bottom of the notes saying where the
+package actually comes from:
+
+```
+To be consumed as a Tatin package, see https://tatin.dev
+```
+
+This is what `tatinPackage` in the collected namespace decides, and it defaults to "the
+project has an `apl-package.json`". For anything that is *not* a package — Tatin itself,
+or Meddy — set it to `0` and you are asked which files of the distribution folder to attach:
+
+```apl
+      parms←⎕SE.GitHub.CreateReleaseParms
+      parms.tatinPackage←0
+      ⎕SE.GitHub.PrintReleaseCommand parms ⎕SE.GitHub.CreateRelease ⍬
+```
+
+Since `Make` empties the distribution folder before it builds, everything in there belongs
+to the build you are releasing.
+
+### Draft first, fine-tune second
+
+The command carries `--draft`, so running it creates the release **without publishing it**:
+nothing is announced, nobody is notified, and it is visible only to you. The draft then sits
+on GitHub where the web page is far better than any command line at the things that want
+judgement — rewriting the title, editing the notes, adding or dropping assets.
+
+That split is the point. The machine supplies what it can get right by looking — which is
+precisely the part that is easiest to get wrong by hand — and you supply the wording.
+
+When it reads the way you want it, press publish on the page — or, without leaving the
+session:
+
+```
+gh release edit v0.19.0 --draft=false
+```
+
+If you would rather see what was collected than the command built from it, `-raw` hands
+you the namespace instead:
+
+```apl
+      ]GitHub.CreateRelease -raw
+```
+
 ## Access tokens
 
 All these commands do is read public data, so you need not worry about authentication — right?
@@ -204,6 +291,9 @@ namespace:
 | `ListIssues` | `owner`, `repo`, `accessToken`, `verbose`, `html`, `filename`, `collapse`, `assignees` |
 | `ReportAllIssues` | `owner`, `accessToken`, `assignees`, `filename`, `raw` |
 | `GoToGitHub` | `(owner repo)` |
+| `CreateRelease` | a Cider project ref, or `⍬` to work it out |
+| `CreateReleaseParms` | nothing — it returns the defaults |
+| `PrintReleaseCommand` | what `CreateRelease` returned |
 
 The variables mean what the flags and modifiers of the corresponding user command mean. All of
 them must be defined; `accessToken` may be an empty vector.
@@ -215,6 +305,17 @@ them must be defined; `accessToken` may be an empty vector.
       ns.(verbose issues forks)←1 1 0
       ns.sort←'issues'
       ⎕SE.GitHub.ListRepos ns
+```
+
+`CreateRelease` takes an optional left argument that beats whatever it collected: a simple
+text vector becomes the `releaseTitle`, and a namespace may carry any of the variables
+`CreateReleaseParms` creates.
+
+```apl
+      parms←⎕SE.GitHub.CreateReleaseParms
+      parms.releaseTitle←'Spring release'
+      parms.draft←0
+      ⎕SE.GitHub.PrintReleaseCommand parms ⎕SE.GitHub.CreateRelease ⍬
 ```
 
 For direct access to GitHub itself, rather than these overviews, use the

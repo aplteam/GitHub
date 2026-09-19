@@ -1,0 +1,154 @@
+ r←{x}CreateRelease y;cfg;list;ind;buff;version;base;source;notes;first;next;files;types;qdmx;problem;indent;invalid;collectedAssets;ref2Proj;pkgFilename;pkgConfig;distFolder
+⍝ Collects everything a GitHub release needs, and returns it in a namespace.
+⍝ **Nothing is sent to GitHub**: this function only collects.\\
+⍝ `⍵` is either a ref to an open Cider project or `⍬`, in which case the function
+⍝ establishes the project itself: the only open one, or the one the user selects.\\
+⍝ The optional `⍺` overrules whatever was collected, and is one of:
+⍝ * A simple text vector: that becomes the `releaseTitle` of the release
+⍝ * A namespace: it may hold none but the variables `CreateReleaseParms` creates,
+⍝   and every one of them takes precedence over what was collected
+⍝
+⍝ `assets` carries every file in the distribution folder, so that a caller can choose from
+⍝ them; the user command does just that with `CommTools.Select`.\\
+⍝ `tatinPackage` defaults to "there is an apl-package.json". When it ends up 1 the ZIP is
+⍝ published on tatin.dev rather than on GitHub, so the collected assets are dropped again
+⍝ and a line saying where to get it is added to the bottom of `body`. Assets the caller
+⍝ specified are kept even then, because insisting on them is the whole point of `⍺`.
+⍝
+⍝ Whatever could not be collected is listed in `r.missing`.
+ r←CreateReleaseParms
+ :If 9=⎕NC'y'
+     ref2Proj←y
+ :Else
+     'Cider is not available'Assert 9=⎕SE.⎕NC'Cider'
+     list←{⍵[;1]}⎕SE.Cider.ListOpenProjects 0
+     'There is no open Cider project'Assert 0<≢list
+     :If 1=≢list
+         ref2Proj←⍎⊃list
+     :Else
+         ind←'SelCreateRelease@Select the project to create a release for:' 0 1 1 CommTools.Select list
+         'Cancelled by user'Assert ¯1≢ind
+         ref2Proj←⍎ind⊃list
+     :EndIf
+ :EndIf
+ 'The project has no "CiderConfig"'Assert 0<ref2Proj.⎕NC'CiderConfig'
+ cfg←ref2Proj.CiderConfig
+ r.projectHome←cfg.HOME
+
+⍝ --- From the Cider config
+ (r.owner r.repo problem)←SplitProjectUrl cfg.CIDER.project_url
+ :If 0<≢problem
+     r.missing,←⊂'owner and repo: ',problem
+ :EndIf
+
+⍝ --- From the package config file, if there is one
+ pkgConfig←⎕NULL
+ pkgFilename←r.projectHome,'/apl-package.json'
+ :If ⎕NEXISTS pkgFilename
+     :Trap 0
+         buff←⊃⎕NGET pkgFilename
+         pkgConfig←⎕JSON⍠('Dialect' 'JSON5')⊢buff
+     :Else
+         qdmx←⎕DMX
+         r.missing,←⊂'apl-package.json cannot be parsed: ',qdmx.EM
+     :EndTrap
+ :Else
+     r.missing,←⊂'apl-package.json (there is none)'
+ :EndIf
+ version←''
+ source←''
+ :If ⎕NULL≢pkgConfig
+     version←{⍵↑⍨¯1+⍵⍳'+'}pkgConfig.version     ⍝ Drop any build metadata ("0.19.0+64")
+     r.version←version
+     r.tag←'v',version
+     r.releaseTitle←'Version ',version          ⍝ A default; ⍺ may well know better
+     r.prerelease←'-'∊version                   ⍝ "0.19.0-beta-1" and such
+     source←pkgConfig.source
+ :Else
+     r.missing,←⊂'version, tag and release title'
+ :EndIf
+ r.tatinPackage←⎕NULL≢pkgConfig                 ⍝ An "apl-package.json" means Tatin has it
+ base←{⍵↑⍨¯1+⍵⍳'-'}version                      ⍝ A pre-release belongs to this version
+
+⍝ --- Release notes: the entry for this very version in `History`
+ :If 0<≢version
+ :AndIf 0<≢source
+ :AndIf ⎕NEXISTS r.projectHome,'/',source,'/History.apla'
+     :Trap 0
+         notes←⍎⊃,/(⊃⎕NGET(r.projectHome,'/',source,'/History.apla')1),¨⊂' '
+         first←(('* ',version,' ')∘≡¨(3+≢version)↑¨notes)⍳1
+         :If first>≢notes                       ⍝ No entry of its own: take the base version's
+             first←(('* ',base,' ')∘≡¨(3+≢base)↑¨notes)⍳1
+         :EndIf
+         :If first≤≢notes
+             notes←first↓notes                  ⍝ Everything below the version's own line
+             next←('* '∘≡¨2↑¨notes)⍳1           ⍝ ...up to the entry for the previous version
+             r.body←(next-1)↑notes
+             :If 0<≢r.body
+                 ⍝ History indents its entries. Markdown takes four or more leading
+                 ⍝ blanks for a code block, so drop what every line has in common.
+                 indent←+/∧\∧⌿' '=↑r.body
+                 r.body←indent↓¨r.body
+                 ⍝ The project's own function names, so that the notes can mark them
+                 ⍝ up too: no pattern can tell "Assert" from "Dyalog" by its looks.
+                 buff←''
+                 :Trap 0
+                     (files types)←(0 1)⎕NINFO⍠1⊢r.projectHome,'/',source,'/*'
+                     buff←{2⊃⎕NPARTS ⍵}¨(2=types)/files      ⍝ Files only: a folder is no function
+                 :EndTrap
+                 r.body←buff BacktickAPLCode r.body
+             :EndIf
+         :ElseIf version≡base
+             r.missing,←⊂'release notes (no entry for ',version,' in History)'
+         :Else
+             r.missing,←⊂'release notes (no entry for ',version,' or ',base,' in History)'
+         :EndIf
+     :Else
+         qdmx←⎕DMX
+         r.missing,←⊂'release notes (History cannot be read: ',qdmx.EM,')'
+     :EndTrap
+ :Else
+     r.missing,←⊂'release notes (no History to take them from)'
+ :EndIf
+
+⍝ --- Assets: every file in the distribution folder. "Make" empties that folder before
+⍝ --- it builds, so whatever is in it belongs to this very build. The caller picks.
+ distFolder←r.projectHome,'/',cfg.CIDER.distributionFolder
+ :If ⎕NEXISTS distFolder
+     :Trap 0
+         (files types)←(0 1)⎕NINFO⍠1⊢distFolder,'/*'
+         files←(2=types)/files                          ⍝ Files only: a folder is no asset
+         files←{⊃,/1↓⎕NPARTS ⍵}¨files                   ⍝ Just the names, not the paths
+         ⍝ Relative to the project: shorter to read, and easier to amend by hand
+         r.assets←(⊂cfg.CIDER.distributionFolder,'/'),¨files
+     :Else
+         qdmx←⎕DMX
+         r.missing,←⊂'assets (',distFolder,' cannot be read: ',qdmx.EM,')'
+     :EndTrap
+ :EndIf
+ collectedAssets←r.assets                       ⍝ To tell them from any the caller adds
+
+⍝ --- Finally what the caller insists on, because that beats anything collected
+ :If 0≠⎕NC'x'
+     :If 9=⎕NC'x'
+         invalid←(x.⎕NL ¯2 ¯3 ¯4 ¯9)~r.⎕NL ¯2
+         :If 0<≢invalid
+             ('No such release parameter: ',⊃,/invalid,¨⊂' ')Assert 0
+         :EndIf
+         r ⎕NS x                                ⍝ What the caller specified rules the day
+     :Else
+         'The left argument must be a simple text vector or a namespace'Assert(1≥≡x)∧' '=1↑0⍴,x
+         r.releaseTitle←,x
+     :EndIf
+ :EndIf
+⍝ --- A Tatin package is not consumed from GitHub, so the notes say where it is
+ :If r.tatinPackage
+     :If r.assets≡collectedAssets               ⍝ Unless the caller insisted on some
+         r.assets←⍬
+     :EndIf
+     r.body,←((0<≢r.body)/⊂''),⊂'To be consumed as a Tatin package, see https://tatin.dev'
+ :ElseIf 0=≢r.assets
+     r.missing,←⊂'assets (there is no file in "',cfg.CIDER.distributionFolder,'")'
+ :EndIf
+ r.⎕DF'[GitHub release: ',r.owner,'/',r.repo,' ',r.tag,']'
+⍝Done

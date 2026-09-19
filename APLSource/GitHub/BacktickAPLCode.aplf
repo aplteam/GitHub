@@ -1,0 +1,29 @@
+ r←{x}BacktickAPLCode rows;pats;flag;names
+⍝ Puts backticks around whatever can be identified as APL code in `rows`, a vector of
+⍝ text vectors, so that Markdown puts it on display as code rather than as prose.\\
+⍝ Identified without any help:
+⍝ * User commands, as in `]ListRepos` and `]GitHub.ListIssues`
+⍝ * Flags and modifiers, as in `-verbose`, `-filename=`, `-sort=issues` and `-?`
+⍝
+⍝ A user command takes the flags that follow it straight away with it, because
+⍝ `]ListIssues -html -verbose` is one command rather than three separate things. A word
+⍝ in between ends it, so in "]ListRepos honours -sort=issues" the two are marked up on
+⍝ their own. Flags that sit next to each other are taken together for the same reason.\\
+⍝ A dot counts as part of the name only when a letter follows it, so "]GitHub.ListIssues"
+⍝ is one name while the full stop ending "...see ]ListRepos." stays out of the markup.\\
+⍝ Plain names cannot be identified by their looks: "Assert" and "CreateRelease" read
+⍝ exactly like "Dyalog", "GitHub" and "ReadMe". They are therefore marked up only when
+⍝ `⍺` says which names there are, typically the functions of the project in question.
+⍝ They are matched whole, so "CreateRelease" does not strike inside "CreateReleaseParms".\\
+⍝ Anything that carries backticks already is left exactly as it is.
+ x←{0=⎕NC ⍵:'' ⋄ ⍎⍵}'x'
+ flag←'-(\?{1,3}|[A-Za-z][A-Za-z0-9_]*(=[A-Za-z0-9_]*)?)'
+ pats←,⊂'`[^`]*`'                                        ⍝ Already done: hands off
+ pats,←⊂'][A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)*( +',flag,')*'
+ pats,←⊂'(?<![A-Za-z0-9_])',flag,'( +',flag,')*'         ⍝ Flags standing on their own
+ :If 0<≢x
+     names←x[⍒≢¨x]                                       ⍝ Longest first: the longer wins
+     pats,←⊂'(?<![A-Za-z0-9_])(',(¯1↓⊃,/names,¨⊂'|'),')(?![A-Za-z0-9_])'
+ :EndIf
+ r←pats ⎕R{0=⍵.PatternNum:⍵.Match ⋄ '`',⍵.Match,'`'}⊣rows
+⍝Done

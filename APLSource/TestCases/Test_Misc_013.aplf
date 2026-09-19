@@ -1,0 +1,31 @@
+ R←Test_Misc_013(stopFlag batchFlag);⎕TRAP;parms;cmd
+⍝ Exercise `PrintReleaseCommand`. Everything is made up, so nothing is collected and
+⍝ nothing is sent anywhere: the function just builds the command line.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ parms←⎕NS''
+ parms.owner←'aplteam'
+ parms.repo←'TestRepo'
+ parms.tag←'v9.9.9'
+ parms.releaseTitle←'Version 9.9.9'
+ parms.body←⍬                                 ⍝ No notes, so no temp file is created
+ parms.projectHome←'C:/nonsense'
+ parms.assets←'Dist/rel.zip'('C:/elsewhere/abs.zip')   ⍝ One relative, one absolute
+ parms.draft←1
+ parms.prerelease←0
+ parms.target←''
+ parms.missing←⍬
+
+ cmd←##.GitHub.PrintReleaseCommand parms
+ →T.PassesIf∨/'gh release create "v9.9.9"'⍷cmd
+ →T.PassesIf∨/'--repo "aplteam/TestRepo"'⍷cmd
+ →T.PassesIf∨/'--title "Version 9.9.9"'⍷cmd
+ →T.PassesIf∨/'--draft'⍷cmd
+ →T.PassesIf~∨/'--prerelease'⍷cmd             ⍝ Not a pre-release, so the flag must be absent
+ →T.PassesIf~∨/'--notes-file'⍷cmd             ⍝ No notes were collected
+ →T.PassesIf∨/'"C:/nonsense/Dist/rel.zip"'⍷cmd        ⍝ Resolved against projectHome
+ →T.PassesIf∨/'"C:/elsewhere/abs.zip"'⍷cmd            ⍝ Absolute, so left alone
+
+ R←T._OK
+⍝Done

@@ -1,0 +1,37 @@
+ r←SplitProjectUrl url;parts;host;owner;repo
+⍝ Takes a project URL and returns a three-item vector: `(owner repo problem)`.\\
+⍝ `problem` is empty when owner and repo could be established. Otherwise it says what
+⍝ is wrong with the URL, and both owner and repo are empty.\\
+⍝ It is safe to assume that the project lives on GitHub, but not that the URL says so
+⍝ in the expected way, therefore:
+⍝ * A protocol is optional, and "www." is ignored
+⍝ * Anything below the repository ("/blob/main/README.md") is ignored
+⍝ * A trailing ".git" is removed
+⍝ * A host other than GitHub is refused rather than taken apart regardless
+ r←'' ''('There is no project URL')
+ :If 0<≢url
+     parts←'/'(≠⊆⊢)url
+     :If (⊂⎕C⊃parts)∊'http:' 'https:'
+         parts←1↓parts
+     :EndIf
+     :If 0=≢parts
+         r←'' ''('The project URL holds nothing but a protocol: ',url)
+     :Else
+         host←⎕C⊃parts
+         :If 'www.'≡4↑host
+             host←4↓host
+         :EndIf
+         :If 'github.com'≢host
+             r←'' ''('The project does not live on GitHub but on <',(⊃parts),'>')
+         :ElseIf 3>≢parts
+             r←'' ''('The project URL carries no repository: ',url)
+         :Else
+             (owner repo)←parts[2 3]
+             :If '.git'≡⎕C ¯4↑repo
+                 repo←¯4↓repo
+             :EndIf
+             r←owner repo ''
+         :EndIf
+     :EndIf
+ :EndIf
+⍝Done

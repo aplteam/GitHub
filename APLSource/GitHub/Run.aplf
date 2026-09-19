@@ -103,6 +103,24 @@
      :EndIf
      parms.raw←0 Args.Switch'raw'
      r←ReportAllIssues parms
+ :Case ⎕C'CreateRelease'
+     parms←CreateRelease ⍬
+     :If Args.Switch'raw'
+         r←parms
+     :Else
+         :If 0<≢parms.assets
+             ⍝ Everything in the distribution folder was collected, so ask which of it
+             ⍝ is to be attached. Selecting none is a perfectly good answer.
+             ind←'SelReleaseAssets@Select the files to attach to the release:' 1 0 1 CommTools.Select parms.assets
+             :If ¯1≡ind
+                 r←'Cancelled by user' ⋄ →0
+             :EndIf
+             parms.assets←parms.assets[,ind]   ⍝ "," so that one file stays a vector
+         :EndIf
+         ⍝ Prints it. Its shy result must NOT be returned, or the user command
+         ⍝ framework would put the very same command on display a second time.
+         PrintReleaseCommand parms
+     :EndIf
  :Case ⎕C'Version'
      r←↑('GitHub'Version)('GitHubAPIv3'GitHubAPIv3.Version)
  :Else

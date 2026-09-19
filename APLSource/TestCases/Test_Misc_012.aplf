@@ -1,0 +1,36 @@
+ R←Test_Misc_012(stopFlag batchFlag);⎕TRAP;proj;parms
+⍝ Exercise `CreateRelease`. A stub project is passed so that the test does not depend
+⍝ on which Cider projects happen to be open.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ proj←⎕NS''
+ proj.CiderConfig←⎕NS''
+ proj.CiderConfig.HOME←##.CiderConfig.HOME
+ proj.CiderConfig.CIDER←⎕NS''
+ proj.CiderConfig.CIDER.project_url←'https://github.com/aplteam/GitHub'
+ proj.CiderConfig.CIDER.distributionFolder←'Dist'
+
+ parms←##.GitHub.CreateRelease proj
+ →T.PassesIf'aplteam'≡parms.owner
+ →T.PassesIf'GitHub'≡parms.repo
+ →T.PassesIf 0<≢parms.version
+ →T.PassesIf parms.tag≡'v',parms.version
+ →T.PassesIf parms.releaseTitle≡'Version ',parms.version   ⍝ As the release page labels it
+ →T.PassesIf(⊂parms.prerelease)∊0 1
+ →T.PassesIf 1=parms.draft                    ⍝ Nothing must become public by accident
+ →T.PassesIf 1=⍴⍴parms.missing
+ ⍝ This project is a Tatin package, so its ZIP goes to tatin.dev rather than to GitHub:
+ →T.PassesIf 1=parms.tatinPackage
+ →T.PassesIf 0=≢parms.assets
+ →T.PassesIf'To be consumed as a Tatin package, see https://tatin.dev'≡⊃⌽parms.body
+ ⍝ The indentation History carries must be gone, or Markdown sees a code block:
+ →T.PassesIf'* '≡2↑⊃parms.body
+ ⍝ …and the user commands and flags in it must be marked up as code:
+ →T.PassesIf∨/'`]ReportAllIssues`'⍷⊃,/parms.body,¨⊂' '
+ →T.PassesIf∨/'`-filename=`'⍷⊃,/parms.body,¨⊂' '
+ ⍝ Whatever assets there are must be relative to the project, never absolute:
+ →T.PassesIf~∨/{(':'∊2↑⍵)∨'/'=⊃⍵}¨parms.assets
+
+ R←T._OK
+⍝Done
