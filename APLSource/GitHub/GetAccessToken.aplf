@@ -7,7 +7,7 @@
      r←(⊃⎕SH'echo $GITHUB_ACCESS_TOKEN')~'"'
  :EndIf
  :If 0=≢r
- :AndIf ⎕NEXISTS configFilename←GetPathToConfig,'github-config.json5'
+ :AndIf ⎕NEXISTS configFilename←GetConfigFilename
      data←⊃⎕NGET configFilename
      data←⎕JSON⍠('Dialect' 'JSON5')⊣data
  :AndIf 0<data.⎕NC'access_token'

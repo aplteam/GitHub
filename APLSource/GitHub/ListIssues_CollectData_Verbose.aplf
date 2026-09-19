@@ -1,4 +1,4 @@
- r←i ListIssues_CollectData_Verbose list;ind
+ r←i ListIssues_CollectData_Verbose list
 ⍝ ⍺ carries index variables for "list"
  r←↑list.(number title labels user.login created_at comments assignees)
  r[;i.labels]←{0=≢⍵:⍵ ⋄ ⊃{⍺,',',⍵}/⍵.name}¨r[;i.labels]         ⍝ Convert lables

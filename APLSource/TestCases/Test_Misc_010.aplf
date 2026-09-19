@@ -1,0 +1,28 @@
+ R←Test_Misc_010(stopFlag batchFlag);⎕TRAP;qdmx
+⍝ Regression test: `Assert` must honour an error number passed as ⍵'s second item.
+⍝ It used to signal 11 whatever was passed.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :Trap 0
+     'my msg'##.GitHub.Assert 0
+     →T.PassesIf 0                    ⍝ Must not get here: Assert has to signal
+ :Else
+     qdmx←⎕DMX
+     →T.PassesIf 11=qdmx.EN
+     →T.PassesIf'my msg'≡qdmx.EM
+ :EndTrap
+
+ :Trap 0
+     'my msg'##.GitHub.Assert 0 22
+     →T.PassesIf 0                    ⍝ Must not get here either
+ :Else
+     qdmx←⎕DMX
+     →T.PassesIf 22=qdmx.EN           ⍝ 22, not 11
+     →T.PassesIf'my msg'≡qdmx.EM
+ :EndTrap
+
+ →T.PassesIf 1≡'my msg'##.GitHub.Assert 1
+
+ R←T._OK
+⍝Done

@@ -1,5 +1,5 @@
  R←Test_ListRepos_003(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
-⍝ Exercise ]GitHub.ListRepos for a non-exisent user
+⍝ Exercise ]GitHub.ListRepos for a non-existent user
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 

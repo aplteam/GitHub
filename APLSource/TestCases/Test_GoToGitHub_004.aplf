@@ -1,4 +1,4 @@
- R←Test_GoToGitHub_004(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
+ R←Test_GoToGitHub_004(stopFlag batchFlag);⎕TRAP;rc;msg;stop
 ⍝ Exercise ]GitHub.GoToGitHub with owner followed by a slash
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
@@ -10,7 +10,7 @@
 
  CommTools.Pause'This test needs you: it will open the homepage of aplteam on GitHub'
 
- CommTools.AddAutomation 'Select' 'SelGo2GitHub@Select repository to go to on GitHub:' 'aplteam''s home page on GitHub'
+ CommTools.AddAutomation 'Select' 'SelGo2GitHub_2@Select repository to go to on GitHub:' 'aplteam''s home page on GitHub'
 
  stop←0
  (rc msg)←2↑stop UCMD'GoToGitHub ''aplteam/'''

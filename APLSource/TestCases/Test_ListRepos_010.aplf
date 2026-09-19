@@ -3,7 +3,8 @@
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
+ cfgFilename←##.GitHub.GetConfigFilename
+ 'Create!'##.GitHub.FilesAndDirs.CheckPath ##.GitHub.GetPathToConfig
  (⊂'{owner: "firlefanz",}')⎕NPUT cfgFilename
 
  stop←0

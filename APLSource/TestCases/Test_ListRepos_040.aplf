@@ -1,0 +1,18 @@
+ R←Test_ListRepos_040(stopFlag batchFlag);⎕TRAP;rc;msg;stop;plain;verbose
+⍝ Regression test: -sort=issues without -verbose must sort by the number of issues.
+⍝ It used to sort the *names*, descending, because there is no issues column to sort by.
+⍝ Compares against -verbose, which always got this right.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg plain)←stop UCMD'ListRepos ''aplteam'' -sort=issues'
+ →T.PassesIf rc=0
+ (rc msg verbose)←stop UCMD'ListRepos ''aplteam'' -verbose -sort=issues'
+ →T.PassesIf rc=0
+ ⍝ Both list the same repos, so the order of the names must be the same as well.
+ ⍝ (Repos with an equal number of issues keep the order GitHub delivered them in.)
+ →T.PassesIf(2↓plain[;1])≡¯2↓2↓verbose[;1]
+
+ R←T._OK
+⍝Done

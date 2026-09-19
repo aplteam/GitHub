@@ -6,7 +6,7 @@
  'Lists all open issues of the given repo with "issue number" and "title", but check'
  '-verbose and -html.'
  ''
- 'You may list all issues of all repos of the given owner with the -allRepos flag.'
+ 'To list the issues of all repos of the given owner use ]GitHub.ReportAllIssues.'
  ''
  '-html        Adds date, body & url and creates an HTML page.'
  '             Allows searching all issues in one go.'

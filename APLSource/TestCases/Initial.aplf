@@ -1,4 +1,10 @@
- Initial;cfgFilename
- cfgFilename←GetHomeFolder,'/.config/dyalog/aplteam/github/github-config.json5'
- (cfgFilename,'.renamed-by-GitHub-tests')⎕NMOVE cfgFilename
+ Initial;cfgFilename;renamed
+ cfgFilename←##.GitHub.GetConfigFilename
+ renamed←cfgFilename,'.renamed-by-GitHub-tests'
+ :If ##.GitHub.FilesAndDirs.IsFile cfgFilename
+     :If ##.GitHub.FilesAndDirs.IsFile renamed          ⍝ Left behind by an aborted run
+         {}##.GitHub.FilesAndDirs.DeleteFile renamed
+     :EndIf
+     renamed ⎕NMOVE cfgFilename
+ :EndIf
  ⍝Done

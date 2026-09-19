@@ -8,7 +8,7 @@
  →T.PassesIf rc=0
  →T.PassesIf 2=⍴⍴list
  →T.PassesIf 7=2⊃⍴list
- →T.PassesIf 1<≢list    ⍝ There will always be at least one issue opne, I guess
+ →T.PassesIf 1<≢list    ⍝ There will always be at least one issue open, I guess
 
  R←T._OK
 ⍝Done

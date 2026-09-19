@@ -46,12 +46,19 @@
          r[⍸0≡¨r[;2];2]←⊂''
      :Else
          :If parms.issues
-             r←(0<list.open_issues_count)⌿⍪list.name
-         :Else
-             r←⍪list.name
+             list←(0<list.open_issues_count)⌿list
          :EndIf
-         :If parms.sort≡'issues'
-             r←r[⍒r[;1];]
+         r←⍪list.name
+         :If 0<≢parms.sort
+             :If parms.sort≡'name'
+                 r←r[alph⍋↑1⌷⍤1⊢r;]
+             :ElseIf parms.sort≡'issues'
+                 r←r[⍒list.open_issues_count;]
+             :Else
+                 ∘∘∘ ⍝ Huh?!
+             :EndIf
+         :ElseIf parms.issues
+             r←r[⍒list.open_issues_count;]
          :Else
              r←r[alph⍋↑1⌷⍤1⊢r;]
          :EndIf

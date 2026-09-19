@@ -1,4 +1,4 @@
- r←ListIssues ns;G;list;qdmx;md;row;i;parms;html;ns2
+ r←ListIssues ns;G;list;qdmx;i;html
  :Trap 11
      G←⎕NEW GitHubAPIv3(,⊂ns.owner)
      G.personal_access_token←ns.accessToken
@@ -15,14 +15,7 @@
  :If 0=≢list
      r←''
  :Else
-     :If ns.verbose
-         i←⎕NS''
-         i.(number title labels creator created_at comments assignees)←⍳7
-         r←i ListIssues_CollectData_Verbose list
-         :If 0<≢ns.assignees
-             r←(1 1,∨/¨(⊂{∨/'∨,'∊⍵:(~⍵∊',∨')⊆⍵ ⋄ ⊂⍵}ns.assignees)∊¨' '~⍨¨{','∊⍵:','(≠⊆⊢)⍵ ⋄ ⊂⍵}¨2↓r[;i.assignees])⌿r
-         :EndIf
-     :ElseIf ns.html
+     :If ns.html
          i←⎕NS''
          i.(number title labels creator body created_at comments assignees updated_at html_url)←⍳10
          r←i ListIssues_CollectData_HTML list
@@ -33,6 +26,13 @@
              ns.filename←'.html'FilesAndDirs.GetTempFilename2'IssueList'
          :EndIf
          r←ListIssues_CreateHTML r ns i
+     :ElseIf ns.verbose
+         i←⎕NS''
+         i.(number title labels creator created_at comments assignees)←⍳7
+         r←i ListIssues_CollectData_Verbose list
+         :If 0<≢ns.assignees
+             r←(1 1,∨/¨(⊂{∨/'∨,'∊⍵:(~⍵∊',∨')⊆⍵ ⋄ ⊂⍵}ns.assignees)∊¨' '~⍨¨{','∊⍵:','(≠⊆⊢)⍵ ⋄ ⊂⍵}¨2↓r[;i.assignees])⌿r
+         :EndIf
      :Else
          r←↑list.(number title)
          r←({⍵,[0.5]'-'⍴⍨¨≢¨⍵}'No.' 'Title')⍪r

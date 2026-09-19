@@ -3,7 +3,6 @@
  md,←⊂'# List of issues for ',ns.owner,'/',ns.repo,' (',(⍕≢data),')'
  md,←⊂''
  :For row :In ↓data
-     ⍝{⍵:.}663=⊃row   ⍝TODO⍝
      md,←⊂'## Issue number #',⍕i.number⊃row
      md,←⊂''
      md,←⊂i.title⊃row

@@ -1,5 +1,5 @@
- R←Test_GoToGitHub_003(stopFlag batchFlag);⎕TRAP;list;rc;msg;stop
-⍝ Exercise ]GitHub.GoToGitHub with owner and repo is spcial syntax (single text vector)
+ R←Test_GoToGitHub_003(stopFlag batchFlag);⎕TRAP;rc;msg;stop
+⍝ Exercise ]GitHub.GoToGitHub with owner and repo in special syntax (single text vector)
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 

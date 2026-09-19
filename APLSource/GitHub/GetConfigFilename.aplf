@@ -1,0 +1,5 @@
+ r←GetConfigFilename
+⍝ Returns the fully qualified name of the configuration file.
+⍝ See also `GetPathToConfig`, which returns just the folder.
+ r←GetPathToConfig,'github-config.json5'
+⍝Done

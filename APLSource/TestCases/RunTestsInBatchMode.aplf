@@ -1,8 +1,4 @@
- (success log)←RunTestsInBatchMode;rc
-⍝ Runs all test with the batch flag on and the debug flag off.
-⍝ Returns a two-item vector:\\
-⍝ [1] Boolean with 1 indicating success and 0 failure\\
-⍝ [2] A vector of character vectors with the messages
- Prepare
- (rc log)←T.RunBatchTests 0
- success←rc=0
+ (success log)←RunTestsInBatchMode
+⍝ Batch mode is not supported: several test cases require user interaction.
+⍝ Signals rather than returning, so that a batch run cannot report a false success.
+ ∘∘∘ ⍝ I am afraid this test suite cannot run in batch mode!

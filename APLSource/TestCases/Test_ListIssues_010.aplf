@@ -7,25 +7,25 @@
  (rc msg data1)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose'
  →T.PassesIf rc=0
 
- (rc msg data2)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=aplteam'
+ (rc msg data2)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignees=aplteam'
  →T.PassesIf rc=0
  →T.PassesIf∧/(⊂⊂'aplteam')∊¨{','(≠⊆⊢)⍵}¨2↓data2[;7]
- →T.PassesIf>/≢¨data1 data2
+ →T.PassesIf≥/≢¨data1 data2
 
- (rc msg data3)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=max-spencer'
+ (rc msg data3)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignees=max-spencer'
  →T.PassesIf rc=0
  →T.PassesIf∧/(⊂⊂'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data3[;7]
- →T.PassesIf>/≢¨data1 data3
+ →T.PassesIf≥/≢¨data1 data3
 
- (rc msg data4)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=aplteam,max-spencer'
+ (rc msg data4)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignees=aplteam,max-spencer'
  →T.PassesIf rc=0
  →T.PassesIf∧/∨/¨(⊂'aplteam' 'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data4[;7]
- →T.PassesIf>/≢¨data1 data4
+ →T.PassesIf≥/≢¨data1 data4
 
- (rc msg data5)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignee=max-spencer∨aplteam'
+ (rc msg data5)←stop UCMD'ListIssues ''aplteam'' ''TestRepo'' -verbose -assignees=max-spencer∨aplteam'
  →T.PassesIf rc=0
  →T.PassesIf∧/∨/¨(⊂'aplteam' 'max-spencer')∊¨{','(≠⊆⊢)⍵}¨2↓data5[;7]
- →T.PassesIf>/≢¨data1 data5
+ →T.PassesIf≥/≢¨data1 data5
 
  R←T._OK
 ⍝Done

@@ -1,0 +1,15 @@
+ R←Test_ListRepos_041(stopFlag batchFlag);⎕TRAP;rc;msg;stop;plain;verbose
+⍝ Regression test: -issues without -verbose must default to the issue count as sort order,
+⍝ as the help promises. It used to fall back to the repo name.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg plain)←stop UCMD'ListRepos ''aplteam'' -issues'
+ →T.PassesIf rc=0
+ (rc msg verbose)←stop UCMD'ListRepos ''aplteam'' -verbose -issues'
+ →T.PassesIf rc=0
+ →T.PassesIf(2↓plain[;1])≡¯2↓2↓verbose[;1]
+
+ R←T._OK
+⍝Done

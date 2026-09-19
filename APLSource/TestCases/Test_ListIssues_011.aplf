@@ -1,4 +1,4 @@
- R←Test_ListIssues_011(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename1;filename2;filename3;filename4;filename5;html2;html3;html4;html5
+ R←Test_ListIssues_011(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename2;filename3;filename4;filename5;html2;html3;html4;html5
 ⍝ Exercise ]GitHub.ListIssues with -html and -assignees=
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed

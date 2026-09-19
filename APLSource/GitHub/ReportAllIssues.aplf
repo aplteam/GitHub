@@ -1,4 +1,4 @@
- r←ReportAllIssues ns_;G;list;qdmx;md;row;i;parms;html;ns;repo;repos;noOf;buff;data
+ r←ReportAllIssues ns_;G;list;qdmx;i;parms;html;ns;repo;repos;noOf;buff;data
  :Trap 11
      G←⎕NEW GitHubAPIv3(,⊂ns_.owner)
      G.personal_access_token←ns_.accessToken
@@ -48,6 +48,6 @@
          r←ReportAllIssues_CreateHTML data ns_ i
      :EndIf
  :Else
-     r←'No issues fouund'
+     r←'No issues found'
  :EndIf
 ⍝Done

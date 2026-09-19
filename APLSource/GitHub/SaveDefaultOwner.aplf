@@ -1,7 +1,7 @@
  {r}←SaveDefaultOwner owner;configFilename;json;ns
  r←⍬
  'Create!'FilesAndDirs.CheckPath GetPathToConfig
- configFilename←GetPathToConfig,'github-config.json5'
+ configFilename←GetConfigFilename
  :If ⎕NEXISTS configFilename
      ns←⎕JSON⍠('Dialect' 'JSON5')⊢⊃⎕NGET configFilename
  :Else

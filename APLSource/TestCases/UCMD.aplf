@@ -1,4 +1,4 @@
- (rc msg data)←{stop}UCMD command
+ (rc msg data)←{stop}UCMD command;qdmx
  stop←{0<⎕NC ⍵:⍎⍵ ⋄ 0}'stop'
  rc←0 ⋄ msg←data←''
  :Trap 0
@@ -7,6 +7,7 @@
      :EndIf
      data←⎕SE.UCMD'GitHub.',command
  :Else
-     rc←⎕EN
-     msg←⎕DM
+     qdmx←⎕DMX
+     rc←qdmx.EN
+     msg←qdmx.DM
  :EndTrap

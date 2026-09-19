@@ -1,4 +1,4 @@
- r←level Help cmd;ref
+ r←level Help cmd
  r←''
  :Select ⊃level
  :Case 0
@@ -9,6 +9,8 @@
          r,←'Lists all issues for a given project of a given owner.'
      :Case ⎕C'GoToGitHub'
          r,←'Opens the homepage of the given repository on GitHub'
+     :Case ⎕C'ReportAllIssues'
+         r,←'Reports all issues over all repos of the given owner.'
      :Case ⎕C'Version'
          r,←'Returns the version numbers of both ]GitHub and the package GitHubAPIv3.'
      :EndSelect

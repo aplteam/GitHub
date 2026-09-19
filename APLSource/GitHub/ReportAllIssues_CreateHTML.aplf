@@ -1,4 +1,4 @@
- filename←ReportAllIssues_CreateHTML(data ns i);md;row;parms;html;ns2;item;ind;title;mat;colHeaders
+ filename←ReportAllIssues_CreateHTML(data ns i);md;parms;html;ns2;ind;title;mat;colHeaders
  md←''
  md,←⊂'# Report for all issues over all repos for ',ns.owner
  :If 0<≢ns.assignees
@@ -8,7 +8,7 @@
      (title mat)←data[ind+0 1]
      colHeaders←mat[1;]
      mat←2↓mat
-     :If 2<≢mat
+     :If 0<≢mat
          md,←⊂''
          md,←⊂'## ',(4↓¯4↓title),' (',(⍕≢mat),')'
          md,←⊂''

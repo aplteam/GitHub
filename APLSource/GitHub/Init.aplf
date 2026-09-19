@@ -1,4 +1,4 @@
- parms Init ns;json;cfg;buildNo;body
+ parms Init ns
 ⍝ Initialize the project
  :If 0<⎕SE.⎕NC'GitHub'
  :AndIf 0=⎕SE.GitHub.⎕NC'DEVELOPMENT'

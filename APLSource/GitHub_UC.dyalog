@@ -34,7 +34,7 @@
      
       c←⎕NS ⍬
       c.(Group Name)←'GitHub' 'ReportAllIssues'
-      c.Parse←'1s -assignees= -raw'
+      c.Parse←'1s -assignees= -raw -filename='
       c.Desc←'Reports all issues for all repos for a given owner'
       r,←c
      
@@ -49,6 +49,9 @@
       r←0⍴⊂''
       :If 0=⎕NC'⎕SE.GitHub'
           {}⎕SE.Tatin.LoadDependencies(1⊃⎕NPARTS ##.SourceFile)⎕SE
+      :EndIf
+      :If 0=⎕NC'⎕SE.GitHub'
+          PrintError''
       :Else
           ref←GetRefToGitHub''
           :If 3=ref.⎕NC'Help'
@@ -63,6 +66,9 @@
       r←''
       :If 0=⎕NC'⎕SE.GitHub'
           {}⎕SE.Tatin.LoadDependencies(1⊃⎕NPARTS ##.SourceFile)⎕SE
+      :EndIf
+      :If 0=⎕NC'⎕SE.GitHub'
+          PrintError''
       :Else
           ref←GetRefToGitHub''
           :If 3=ref.⎕NC'Run'

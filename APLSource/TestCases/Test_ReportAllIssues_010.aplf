@@ -1,0 +1,25 @@
+ R←Test_ReportAllIssues_010(stopFlag batchFlag);⎕TRAP;rc;msg;stop;raw;data;filename;html;i;name
+⍝ Regression test: every repo that has open issues must show up in the report.
+⍝ Repos with just one or two of them used to be dropped silently.
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ (rc msg raw)←stop UCMD'ReportAllIssues aplteam -raw'
+ →T.PassesIf rc=0
+ data←,raw                          ⍝ Alternates "*** repo ***" and the issue matrix
+ →T.PassesIf 0<≢data
+
+ (rc msg filename)←stop UCMD'ReportAllIssues aplteam'
+ →T.GoToTidyUp rc≠0
+ html←∊⊃⎕NGET filename 1
+ :For i :In {⍵/⍨(≢⍵)⍴1 0}⍳≢data
+     name←4↓¯4↓i⊃data
+     →T.GoToTidyUp~∨/name⍷html      ⍝ Every repo in the raw data belongs in the report
+ :EndFor
+
+ R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile filename
+⍝Done

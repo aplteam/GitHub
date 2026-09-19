@@ -1,12 +1,19 @@
- R←Test_ReportAllIssues_002(stopFlag batchFlag);⎕TRAP;stop;rc;msg;data
-⍝ Exercise ]GitHub.ReportAllIssues without any parameters
+ R←Test_ReportAllIssues_002(stopFlag batchFlag);⎕TRAP;stop;rc;msg;data;cfgFilename
+⍝ Exercise ]GitHub.ReportAllIssues without an owner (should use the default owner)
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
+ cfgFilename←##.GitHub.GetConfigFilename
+ 'Create!'##.GitHub.FilesAndDirs.CheckPath ##.GitHub.GetPathToConfig
+ (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename
+
  stop←0
  (rc msg data)←stop UCMD'ReportAllIssues -raw'
- →T.PassesIf rc=0
- →T.PassesIf 2=⍴⍴data
+ →T.GoToTidyUp rc≠0
+ →T.GoToTidyUp 2≠⍴⍴data
 
  R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile cfgFilename
 ⍝Done

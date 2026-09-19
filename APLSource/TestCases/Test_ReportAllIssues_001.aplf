@@ -11,5 +11,5 @@
  R←T._OK
 
 ∆TidyUp:
- {}##.GitHub.FilesAndDirs.RmDirByForce filename
+ {}##.GitHub.FilesAndDirs.DeleteFile filename
 ⍝Done

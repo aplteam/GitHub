@@ -1,0 +1,19 @@
+ R←Test_ReportAllIssues_011(stopFlag batchFlag);⎕TRAP;rc;msg;stop;filename;wanted
+⍝ Regression test: -filename= must be accepted and honoured.
+⍝ It was documented and processed but never declared in Parse, so it was rejected
+⍝ with "unknown modifier".
+ ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ stop←0
+ wanted←'.html'##.GitHub.FilesAndDirs.GetTempFilename2'RegressionReport'
+ (rc msg filename)←stop UCMD'ReportAllIssues aplteam -filename="',wanted,'"'
+ →T.GoToTidyUp rc≠0
+ →T.GoToTidyUp wanted≢≡filename
+ →T.GoToTidyUp~⎕NEXISTS filename
+
+ R←T._OK
+
+∆TidyUp:
+ {}##.GitHub.FilesAndDirs.DeleteFile wanted
+⍝Done
