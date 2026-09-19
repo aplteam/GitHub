@@ -1,10 +1,12 @@
  R←Test_Misc_011(stopFlag batchFlag);⎕TRAP;name;txt
-⍝ Regression test: level-0 help (]cmd -?) must not be empty for any command.
+⍝ Regression test: level-0 help (]cmd -?) must not be empty for any user command.
 ⍝ `ReportAllIssues` used to have no :Case at all, so it printed nothing.
+⍝ Note that `Public` is NOT the list to use: it is the package's API, which holds
+⍝ functions that are not user commands and therefore have no user command help.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :For name :In ##.GitHub.Public,⊂'Version'
+ :For name :In GetUserCommands
      txt←0 ##.GitHub.Help name
      →T.PassesIf 0<≢txt
  :EndFor

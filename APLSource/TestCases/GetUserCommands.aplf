@@ -1,0 +1,8 @@
+ r←GetUserCommands
+⍝ Returns the names of all ]GitHub user commands, "Version" among them, by asking
+⍝ the user command framework rather than by keeping a list of our own.
+ r←⎕SE.UCMD'GitHub -??'
+ r←↑2↓(⎕UCS 13)(≠⊆⊢)r
+ r←(¯1+r[;1]⍳']')↑r
+ r←{⍵↑⍨¯1+⍵⍳' '}¨##.GitHub.APLTreeUtils2.DLB↓r
+⍝Done
