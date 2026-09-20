@@ -5,7 +5,7 @@
 
  cfgFilename←##.GitHub.GetConfigFilename
  'Create!'##.GitHub.FilesAndDirs.CheckPath ##.GitHub.GetPathToConfig
- (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename
+ (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename 1
 
  stop←0
  (rc msg data)←stop UCMD'ReportAllIssues -assignees=aplteam -raw'

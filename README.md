@@ -314,6 +314,17 @@ text vector becomes the `releaseTitle`, and a namespace may carry any of the var
 For direct access to GitHub itself, rather than these overviews, use the
 [`GitHubAPIv3`](https://github.com/aplteam/GitHubAPIv3) package.
 
+## Debugging
+
+A handful of operations are trapped, so that `CreateRelease` can report what it could
+not collect in `missing` rather than crash: reading `apl-package.json`, executing
+`History.apla`, and listing the distribution folder. Set `DEBUG` to 1 to switch those
+traps off and have the error surface where it happens:
+
+```apl
+      ⎕SE.GitHub.DEBUG←1
+```
+
 ## Requirements
 
 Dyalog APL 18.2 or later, on Windows, Linux or macOS.

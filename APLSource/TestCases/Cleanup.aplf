@@ -1,0 +1,22 @@
+ Cleanup;cfgFilename;backup;qdmx;⎕TRAP
+⍝ Puts the configuration file back, the one `Initial` copied aside before the test
+⍝ cases got to overwrite and delete it.\\
+⍝ Whatever the test cases left behind under that name is thrown away first: it is
+⍝ their making, not the user's.
+ cfgFilename←##.GitHub.GetConfigFilename
+ backup←cfgFilename,'.saved-by-GitHub-tests'
+ :If ##.GitHub.FilesAndDirs.IsFile backup
+     :Trap (~##.GitHub.DEBUG)/19 22
+         :If ##.GitHub.FilesAndDirs.IsFile cfgFilename
+             {}##.GitHub.FilesAndDirs.DeleteFile cfgFilename
+         :EndIf
+         cfgFilename ⎕NMOVE backup
+     :Else
+         qdmx←⎕DMX
+         ⎕←'*** The configuration file could not be put back: ',qdmx.EM
+         ⎕←'*** It is still here: ',backup
+         ⎕TRAP←0 'S'
+         ∘∘∘
+     :EndTrap
+ :EndIf
+⍝Done

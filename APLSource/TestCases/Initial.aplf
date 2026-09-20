@@ -1,41 +1,43 @@
- {r}←Initial ps;token;cfgFilename;data;msg;os;qdmx
-⍝ Establishes whether an access token will be available to the test cases, and gives
-⍝ the user a chance to cancel when it will not.\\
-⍝ An environment variable "GITHUB_ACCESS_TOKEN" is all that is needed, and it takes
-⍝ precedence anyway, so when there is one there is nothing to say.\\
+ {r}←Initial ps;token;cfgFilename;backup;data;msg;os;⎕TRAP
+⍝ Two things are settled here before any test case runs.\\
+⍝ **The access token**: an environment variable "GITHUB_ACCESS_TOKEN" is all that is
+⍝ needed, and it takes precedence anyway, so when there is one there is nothing to say.
 ⍝ A token in the configuration file is a different matter: the test cases create,
 ⍝ overwrite and delete that very file, so a token in it does not survive the run. The
 ⍝ user is then told how to put it into the environment instead, and asked whether she
 ⍝ would rather cancel — unless we run in batch mode, when there is nobody to ask.\\
+⍝ **The configuration file**: it is copied aside, because the test cases destroy it.
+⍝ `Cleanup` puts it back. A copy that is there already was left behind by a run that
+⍝ did not finish, and since the original may well be gone this interrupts rather than
+⍝ guessing what to do with it.\\
 ⍝ Returns an empty vector, which lets `Tester2` carry on, or a message, which makes it
 ⍝ report that message and run no test at all.
  r←''
+ cfgFilename←##.GitHub.GetConfigFilename
+ backup←cfgFilename,'.saved-by-GitHub-tests'
  os←⎕C ##.GitHub.APLTreeUtils2.GetOperatingSystem ⍬
+
+⍝ --- Will there be an access token?
  :If 'win'≡os
      token←2 ⎕NQ #'GetEnvironment' 'GITHUB_ACCESS_TOKEN'
  :Else
      token←(⊃⎕SH'echo $GITHUB_ACCESS_TOKEN')~'"'
  :EndIf
- :If 0=≢token                                   ⍝ Nothing in the environment, so look
-     cfgFilename←##.GitHub.GetConfigFilename    ⍝ into the configuration file
-     :If ##.GitHub.FilesAndDirs.IsFile cfgFilename
-         :Trap 0                                ⍝ An unreadable config is not our problem
-             data←⎕JSON⍠('Dialect' 'JSON5')⊢⊃⎕NGET cfgFilename
-             :If 0<data.⎕NC'access_token'
-                 token←data.access_token
-             :EndIf
-         :Else
-             qdmx←⎕DMX
-         :EndTrap
+ :If 0=≢token                                       ⍝ Nothing in the environment, so look
+     :If ##.GitHub.FilesAndDirs.IsFile cfgFilename  ⍝ into the configuration file
+         data←⎕JSON⍠('Dialect' 'JSON5')⊢⊃⎕NGET cfgFilename
+         :If 0<data.⎕NC'access_token'
+             token←data.access_token
+         :EndIf
      :EndIf
-     :If 0<≢token                               ⍝ In the file but not in the environment
-     :AndIf 0=ps.batchFlag                      ⍝ ...and somebody is there to answer
+     :If 0<≢token                                   ⍝ In the file but not in the environment
+     :AndIf 0=ps.batchFlag                          ⍝ ...and somebody is there to answer
          msg←⊂'There is an access token in the configuration file but not in the environment.'
          msg,←⊂'The test cases create, overwrite and delete that very file, so the token will'
          msg,←⊂'not survive this run: the tests will talk to GitHub unauthenticated.'
          msg,←⊂''
-         msg,←⊂'Should you hit GitHub''s rate limit, cancel here, put the token into the'
-         msg,←⊂'environment and start Dyalog from that very shell:'
+         msg,←⊂'Should you hit GitHub''s rate limit, cancel, make sure Cleanup ran, open a shell,'
+         msg,←⊂'put the token into the environment and start Dyalog from that very shell:'
          msg,←⊂''
          :If 'win'≡os
              msg,←⊂'   set GITHUB_ACCESS_TOKEN=<your token>'
@@ -48,9 +50,27 @@
          :EndIf
          msg,←⊂''
          msg,←⊂'Would you like to cancel the tests?'
-         :If 0 CommTools.YesOrNo msg            ⍝ "No" is the default
+         :If 0 CommTools.YesOrNo msg                ⍝ "No" is the default
              r←'Cancelled by user'
+             :Return                                ⍝ Before anything is copied anywhere
          :EndIf
      :EndIf
+ :EndIf
+
+⍝ --- Save the configuration file, because the test cases destroy it
+ :If ##.GitHub.FilesAndDirs.IsFile backup
+     msg←⊂'*** A copy of the configuration file is already there:'
+     msg,←⊂'***    ',backup
+     msg,←⊂'*** It was left behind by a test run that did not finish, and the original may'
+     msg,←⊂'*** well have been deleted by that very run. Nothing is done automatically here.'
+     msg,←⊂'***'
+     msg,←⊂'*** Rename it back to'
+     msg,←⊂'***    ',cfgFilename
+     msg,←⊂'*** (or delete it, if you are sure it is of no use), then run the tests again.'
+     ⎕←↑msg
+     ⎕TRAP←0 'S'                                    ⍝ So that this really does stop
+     ∘∘∘
+ :ElseIf ##.GitHub.FilesAndDirs.IsFile cfgFilename
+     backup ⎕NCOPY cfgFilename                      ⍝ `Cleanup` moves it back
  :EndIf
 ⍝Done

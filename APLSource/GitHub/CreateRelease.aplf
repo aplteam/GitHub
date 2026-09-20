@@ -45,7 +45,7 @@
  pkgConfig←⎕NULL
  pkgFilename←r.projectHome,'/apl-package.json'
  :If ⎕NEXISTS pkgFilename
-     :Trap 0
+     :Trap (~DEBUG)/11 19 22                    ⍝ Unreadable, or not JSON5
          buff←⊃⎕NGET pkgFilename
          pkgConfig←⎕JSON⍠('Dialect' 'JSON5')⊢buff
      :Else
@@ -74,7 +74,8 @@
  :If 0<≢version
  :AndIf 0<≢source
  :AndIf ⎕NEXISTS r.projectHome,'/',source,'/History.apla'
-     :Trap 0
+     :Trap (~DEBUG)/2 6 11 19 22                ⍝ History is *executed*, not merely read,
+⍝ so it can fail in more ways than a file can
          notes←⍎⊃,/(⊃⎕NGET(r.projectHome,'/',source,'/History.apla')1),¨⊂' '
          first←(('* ',version,' ')∘≡¨(3+≢version)↑¨notes)⍳1
          :If first>≢notes                       ⍝ No entry of its own: take the base version's
@@ -91,11 +92,8 @@
                  r.body←indent↓¨r.body
                  ⍝ The project's own function names, so that the notes can mark them
                  ⍝ up too: no pattern can tell "Assert" from "Dyalog" by its looks.
-                 buff←''
-                 :Trap 0
-                     (files types)←(0 1)⎕NINFO⍠1⊢r.projectHome,'/',source,'/*'
-                     buff←{2⊃⎕NPARTS ⍵}¨(2=types)/files      ⍝ Files only: a folder is no function
-                 :EndTrap
+                 (files types)←(0 1)⎕NINFO⍠1⊢r.projectHome,'/',source,'/*'
+                 buff←{2⊃⎕NPARTS ⍵}¨(2=types)/files      ⍝ Files only: a folder is no function
                  r.body←buff BacktickAPLCode r.body
              :EndIf
          :ElseIf version≡base
@@ -115,7 +113,7 @@
 ⍝ --- it builds, so whatever is in it belongs to this very build. The caller picks.
  distFolder←r.projectHome,'/',cfg.CIDER.distributionFolder
  :If ⎕NEXISTS distFolder
-     :Trap 0
+     :Trap (~DEBUG)/19 22                       ⍝ The folder is there but unreadable
          (files types)←(0 1)⎕NINFO⍠1⊢distFolder,'/*'
          files←(2=types)/files                          ⍝ Files only: a folder is no asset
          files←{⊃,/1↓⎕NPARTS ⍵}¨files                   ⍝ Just the names, not the paths

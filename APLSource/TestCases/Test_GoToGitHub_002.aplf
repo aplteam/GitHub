@@ -10,7 +10,7 @@
 
  cfgFilename←##.GitHub.GetConfigFilename
  'Create!'##.GitHub.FilesAndDirs.CheckPath ##.GitHub.GetPathToConfig
- (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename
+ (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename 1
 
  CommTools.Pause'This test needs you: it will open the homepage of the Test Repo on GitHub'
 

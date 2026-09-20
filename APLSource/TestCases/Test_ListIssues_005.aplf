@@ -5,7 +5,7 @@
 
  cfgFilename←##.GitHub.GetConfigFilename
  'Create!'##.GitHub.FilesAndDirs.CheckPath ##.GitHub.GetPathToConfig
- (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename
+ (⊂'{owner: "aplteam",}')⎕NPUT cfgFilename 1
 
  stop←0
  (rc msg filename)←stop UCMD'ListIssues ''Tatin'' -html -collapse'

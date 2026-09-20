@@ -46,17 +46,17 @@
  flag←0
  ns←⎕NS''
  ns.nonsense←42
- :Trap 0
+ :Trap (~stopFlag)/11                               ⍝ Assert always signals 11
      {}ns ##.GitHub.CreateRelease proj
  :Else
      qdmx←⎕DMX
-     flag←∨/'nonsense'⍷⎕DMX.EM
+     flag←∨/'nonsense'⍷qdmx.EM
  :EndTrap
  →T.PassesIf flag
 
  ⍝ …and so must a left argument that is neither text nor a namespace:
  flag←0
- :Trap 0
+ :Trap (~stopFlag)/11                               ⍝ Assert always signals 11
      {}(1 2 3)##.GitHub.CreateRelease proj
  :Else
      qdmx←⎕DMX
