@@ -4,7 +4,7 @@
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
- :Trap (~stopFlag)/11 22                            ⍝ Assert signals one or the other
+ :Trap 11 22                          ⍝ Not gated on stopFlag: catching this IS the test
      'my msg'##.GitHub.Assert 0
      →T.PassesIf 0                    ⍝ Must not get here: Assert has to signal
  :Else
@@ -13,7 +13,7 @@
      →T.PassesIf'my msg'≡qdmx.EM
  :EndTrap
 
- :Trap (~stopFlag)/11 22                            ⍝ Assert signals one or the other
+ :Trap 11 22                          ⍝ Not gated on stopFlag: catching this IS the test
      'my msg'##.GitHub.Assert 0 22
      →T.PassesIf 0                    ⍝ Must not get here either
  :Else

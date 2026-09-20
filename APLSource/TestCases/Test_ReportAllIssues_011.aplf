@@ -9,7 +9,7 @@
  wanted←'.html'##.GitHub.FilesAndDirs.GetTempFilename2'RegressionReport'
  (rc msg filename)←stop UCMD'ReportAllIssues aplteam -filename="',wanted,'"'
  →T.GoToTidyUp rc≠0
- →T.GoToTidyUp wanted≢≡filename
+ →T.GoToTidyUp wanted≢filename
  →T.GoToTidyUp~⎕NEXISTS filename
 
  R←T._OK

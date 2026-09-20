@@ -35,6 +35,8 @@
          msg←⊂'There is an access token in the configuration file but not in the environment.'
          msg,←⊂'The test cases create, overwrite and delete that very file, so the token will'
          msg,←⊂'not survive this run: the tests will talk to GitHub unauthenticated.'
+         msg,←⊂'However, a backup will be taken beforehand, and restored by the Cleanup'
+         msg,←⊂'function after the test suite is finished.'
          msg,←⊂''
          msg,←⊂'Should you hit GitHub''s rate limit, cancel, make sure Cleanup ran, open a shell,'
          msg,←⊂'put the token into the environment and start Dyalog from that very shell:'

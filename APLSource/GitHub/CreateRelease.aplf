@@ -131,7 +131,7 @@
      :If 9=⎕NC'x'
          invalid←(x.⎕NL ¯2 ¯3 ¯4 ¯9)~r.⎕NL ¯2
          :If 0<≢invalid
-             ('No such release parameter: ',⊃,/invalid,¨⊂' ')Assert 0
+             ('No such release parameter: ',{0=≢⍵:⍵ ⋄ ⊃{⍺,', ',⍵}/⍵}invalid)Assert 0
          :EndIf
          ⍝ The NAME on the left, not the ref: with a ref this is a DOMAIN ERROR
          ⍝ ("Invalid left argument") in 18.2 and 19.0, and the package goes back
