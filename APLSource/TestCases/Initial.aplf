@@ -1,10 +1,56 @@
- Initial;cfgFilename;renamed
- cfgFilename←##.GitHub.GetConfigFilename
- renamed←cfgFilename,'.renamed-by-GitHub-tests'
- :If ##.GitHub.FilesAndDirs.IsFile cfgFilename
-     :If ##.GitHub.FilesAndDirs.IsFile renamed          ⍝ Left behind by an aborted run
-         {}##.GitHub.FilesAndDirs.DeleteFile renamed
-     :EndIf
-     renamed ⎕NMOVE cfgFilename
+ {r}←Initial ps;token;cfgFilename;data;msg;os;qdmx
+⍝ Establishes whether an access token will be available to the test cases, and gives
+⍝ the user a chance to cancel when it will not.\\
+⍝ An environment variable "GITHUB_ACCESS_TOKEN" is all that is needed, and it takes
+⍝ precedence anyway, so when there is one there is nothing to say.\\
+⍝ A token in the configuration file is a different matter: the test cases create,
+⍝ overwrite and delete that very file, so a token in it does not survive the run. The
+⍝ user is then told how to put it into the environment instead, and asked whether she
+⍝ would rather cancel — unless we run in batch mode, when there is nobody to ask.\\
+⍝ Returns an empty vector, which lets `Tester2` carry on, or a message, which makes it
+⍝ report that message and run no test at all.
+ r←''
+ os←⎕C ##.GitHub.APLTreeUtils2.GetOperatingSystem ⍬
+ :If 'win'≡os
+     token←2 ⎕NQ #'GetEnvironment' 'GITHUB_ACCESS_TOKEN'
+ :Else
+     token←(⊃⎕SH'echo $GITHUB_ACCESS_TOKEN')~'"'
  :EndIf
- ⍝Done
+ :If 0=≢token                                   ⍝ Nothing in the environment, so look
+     cfgFilename←##.GitHub.GetConfigFilename    ⍝ into the configuration file
+     :If ##.GitHub.FilesAndDirs.IsFile cfgFilename
+         :Trap 0                                ⍝ An unreadable config is not our problem
+             data←⎕JSON⍠('Dialect' 'JSON5')⊢⊃⎕NGET cfgFilename
+             :If 0<data.⎕NC'access_token'
+                 token←data.access_token
+             :EndIf
+         :Else
+             qdmx←⎕DMX
+         :EndTrap
+     :EndIf
+     :If 0<≢token                               ⍝ In the file but not in the environment
+     :AndIf 0=ps.batchFlag                      ⍝ ...and somebody is there to answer
+         msg←⊂'There is an access token in the configuration file but not in the environment.'
+         msg,←⊂'The test cases create, overwrite and delete that very file, so the token will'
+         msg,←⊂'not survive this run: the tests will talk to GitHub unauthenticated.'
+         msg,←⊂''
+         msg,←⊂'Should you hit GitHub''s rate limit, cancel here, put the token into the'
+         msg,←⊂'environment and start Dyalog from that very shell:'
+         msg,←⊂''
+         :If 'win'≡os
+             msg,←⊂'   set GITHUB_ACCESS_TOKEN=<your token>'
+             msg,←⊂'   dyalog'
+             msg,←⊂''
+             msg,←⊂'   (in PowerShell:  $env:GITHUB_ACCESS_TOKEN=''<your token>'' )'
+         :Else
+             msg,←⊂'   export GITHUB_ACCESS_TOKEN=<your token>'
+             msg,←⊂'   dyalog'
+         :EndIf
+         msg,←⊂''
+         msg,←⊂'Would you like to cancel the tests?'
+         :If 0 CommTools.YesOrNo msg            ⍝ "No" is the default
+             r←'Cancelled by user'
+         :EndIf
+     :EndIf
+ :EndIf
+⍝Done

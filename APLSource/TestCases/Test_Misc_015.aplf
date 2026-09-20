@@ -1,4 +1,4 @@
- R←Test_Misc_015(stopFlag batchFlag);⎕TRAP;proj;template;collected;titled;ns;overruled;flag
+ R←Test_Misc_015(stopFlag batchFlag);⎕TRAP;proj;template;collected;titled;ns;overruled;flag;qdmx
 ⍝ Exercise `CreateReleaseParms` and the optional left argument of `CreateRelease`.
 ⍝ A stub project is passed, so the test does not depend on open Cider projects.
  ⎕TRAP←(999 'C' '∘∘∘ ⍝ Deliberate error')(0 'N')
@@ -49,6 +49,7 @@
  :Trap 0
      {}ns ##.GitHub.CreateRelease proj
  :Else
+     qdmx←⎕DMX
      flag←∨/'nonsense'⍷⎕DMX.EM
  :EndTrap
  →T.PassesIf flag
@@ -58,6 +59,7 @@
  :Trap 0
      {}(1 2 3)##.GitHub.CreateRelease proj
  :Else
+     qdmx←⎕DMX
      flag←1
  :EndTrap
  →T.PassesIf flag

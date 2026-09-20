@@ -1,5 +1,0 @@
- Cleanup;cfgFilename
- cfgFilename←##.GitHub.GetConfigFilename
- :If ##.GitHub.FilesAndDirs.IsFile cfgFilename,'.renamed-by-GitHub-tests'
-     cfgFilename ⎕NMOVE cfgFilename,'.renamed-by-GitHub-tests'
- :EndIf
